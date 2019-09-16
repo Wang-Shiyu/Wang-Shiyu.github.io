@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="String processing in coding.">
+<meta name="keywords" content="C++,java,python,string">
+<meta property="og:type" content="article">
+<meta property="og:title" content="String in LeetCode">
+<meta property="og:url" content="http://SamuelWong.com/2019/08/05/String&Math/index.html">
+<meta property="og:site_name" content="Samuel Wong">
+<meta property="og:description" content="String processing in coding.">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-09-16T14:42:51.566Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="String in LeetCode">
+<meta name="twitter:description" content="String processing in coding.">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://SamuelWong.com/2019/08/05/String&Math/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>String in LeetCode | Samuel Wong</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Samuel Wong</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Learning with me</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://SamuelWong.com/2019/08/05/String&Math/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shiyu Wang">
+      <meta itemprop="description" content="Life is short, you need Python">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Samuel Wong">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">String in LeetCode
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-08-05 21:34:12" itemprop="dateCreated datePublished" datetime="2019-08-05T21:34:12-04:00">2019-08-05</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-09-16 10:42:51" itemprop="dateModified" datetime="2019-09-16T10:42:51-04:00">2019-09-16</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>String processing in coding.</p>
+ <a id="more"></a>
+
+<h2 id="String-amp-Math"><a href="#String-amp-Math" class="headerlink" title="String &amp; Math"></a>String &amp; Math</h2><h3 id="6-ZigZag-Conversion"><a href="#6-ZigZag-Conversion" class="headerlink" title="6. ZigZag Conversion"></a>6. <a href="https://leetcode.com/problems/zigzag-conversion/" target="_blank" rel="noopener">ZigZag Conversion</a></h3><h4 id="c-by-rows"><a href="#c-by-rows" class="headerlink" title="c++ by rows"></a><code>c++</code> by rows</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">convert</span><span class="params">(<span class="built_in">string</span> s, <span class="keyword">int</span> numRows)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (numRows==<span class="number">1</span>) <span class="keyword">return</span> s;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; rows(min(numRows, <span class="keyword">int</span>(s.size())));</span><br><span class="line">        <span class="keyword">int</span> curRow = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">char</span> c:s)&#123;</span><br><span class="line">            rows[curRow] += c;</span><br><span class="line">            <span class="keyword">if</span>(curRow == <span class="number">0</span> || curRow == numRows<span class="number">-1</span>)&#123;</span><br><span class="line">                flag = !flag;<span class="comment">// change direction</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(flag) curRow--;</span><br><span class="line">            <span class="keyword">else</span> curRow++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">string</span> res;</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">string</span> row : rows)</span><br><span class="line">            res += row;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-String-to-Integer-atoi"><a href="#8-String-to-Integer-atoi" class="headerlink" title="8 String to Integer (atoi)"></a>8 <a href="https://leetcode.com/problems/string-to-integer-atoi/" target="_blank" rel="noopener">String to Integer (atoi)</a></h3><h4 id="c"><a href="#c" class="headerlink" title="c++"></a><code>c++</code></h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">myAtoi</span><span class="params">(<span class="built_in">string</span> str)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>, i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> sign = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(str[i] == <span class="string">' '</span>) i++;</span><br><span class="line">        <span class="keyword">if</span>(str[i] == <span class="string">'-'</span> || str[i] == <span class="string">'+'</span>)</span><br><span class="line">            sign = (str[i++] == <span class="string">'-'</span>)? <span class="number">-1</span> : <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(<span class="built_in">isdigit</span>(str[i])) &#123;</span><br><span class="line">            <span class="keyword">if</span> (res &gt;  INT_MAX / <span class="number">10</span> || (res == INT_MAX / <span class="number">10</span> &amp;&amp; str[i] - <span class="string">'0'</span> &gt; <span class="number">7</span>)) &#123;</span><br><span class="line">            <span class="keyword">if</span> (sign == <span class="number">1</span>) <span class="keyword">return</span> INT_MAX;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">return</span> INT_MIN;</span><br><span class="line">        &#125;</span><br><span class="line">            res = res*<span class="number">10</span> + (str[i++] - <span class="string">'0'</span>);</span><br><span class="line">            <span class="comment">//The assumption in this question was clear: you are in an 32 bit int system, you cannot do thing like this;</span></span><br><span class="line">            <span class="comment">//if(res*indicator &gt;= INT_MAX) return INT_MAX;</span></span><br><span class="line">            <span class="comment">//if(res*indicator &lt;= INT_MIN) return INT_MIN;                </span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res*sign;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-Palindrome-Number"><a href="#9-Palindrome-Number" class="headerlink" title="9 Palindrome Number"></a>9 <a href="https://leetcode.com/problems/palindrome-number/" target="_blank" rel="noopener">Palindrome Number</a></h3><h4 id="C-Revert-half-of-the-number"><a href="#C-Revert-half-of-the-number" class="headerlink" title="C++ Revert half of the number"></a><code>C++</code> Revert half of the number</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isPalindrome</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(x &lt; <span class="number">0</span> || (x%<span class="number">10</span> ==<span class="number">0</span> &amp;&amp; x&gt;<span class="number">0</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(x &lt; <span class="number">10</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">int</span> revert = <span class="number">0</span>;</span><br><span class="line">            <span class="comment">//12321 --&gt;   1  12   123</span></span><br><span class="line">            <span class="comment">//12321 --&gt; 1232 123  12</span></span><br><span class="line">            <span class="comment">//123321 --&gt;  1    12   123</span></span><br><span class="line">            <span class="comment">//      --&gt; 12332 1233  123</span></span><br><span class="line">            <span class="keyword">while</span>(x &gt; revert)&#123;</span><br><span class="line">                revert = revert*<span class="number">10</span> + x%<span class="number">10</span>;</span><br><span class="line">                x /= <span class="number">10</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> x == revert || x == revert/<span class="number">10</span>;</span><br><span class="line">           </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="12-Integer-to-Roman"><a href="#12-Integer-to-Roman" class="headerlink" title="12 Integer to Roman"></a>12 <a href="https://leetcode.com/problems/integer-to-roman/" target="_blank" rel="noopener">Integer to Roman</a></h3><h4 id="c-amp-java"><a href="#c-amp-java" class="headerlink" title="c++ &amp;java"></a><code>c++</code> &amp;<code>java</code></h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">intToRoman</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//Input is guaranteed to be within the range from 1 to 3999.</span></span><br><span class="line">        <span class="built_in">string</span> M[<span class="number">4</span>] = &#123;<span class="string">""</span>, <span class="string">"M"</span>, <span class="string">"MM"</span>, <span class="string">"MMM"</span>&#125;;</span><br><span class="line">        <span class="built_in">string</span> C[<span class="number">10</span>] = &#123;<span class="string">""</span>, <span class="string">"C"</span>, <span class="string">"CC"</span>, <span class="string">"CCC"</span>, <span class="string">"CD"</span>, <span class="string">"D"</span>, <span class="string">"DC"</span>, <span class="string">"DCC"</span>, <span class="string">"DCCC"</span>, <span class="string">"CM"</span>&#125;;</span><br><span class="line">        <span class="built_in">string</span> X[<span class="number">10</span>] = &#123;<span class="string">""</span>, <span class="string">"X"</span>, <span class="string">"XX"</span>, <span class="string">"XXX"</span>, <span class="string">"XL"</span>, <span class="string">"L"</span>, <span class="string">"LX"</span>, <span class="string">"LXX"</span>, <span class="string">"LXXX"</span>, <span class="string">"XC"</span>&#125;;</span><br><span class="line">        <span class="built_in">string</span> I[<span class="number">10</span>] = &#123;<span class="string">""</span>, <span class="string">"I"</span>, <span class="string">"II"</span>, <span class="string">"III"</span>, <span class="string">"IV"</span>, <span class="string">"V"</span>, <span class="string">"VI"</span>, <span class="string">"VII"</span>, <span class="string">"VIII"</span>, <span class="string">"IX"</span>&#125;;</span><br><span class="line">        <span class="keyword">return</span> M[num/<span class="number">1000</span>]+C[(num/<span class="number">100</span>)%<span class="number">10</span>]+X[(num/<span class="number">10</span>)%<span class="number">10</span>]+I[num%<span class="number">10</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="13-Roman-to-Integer"><a href="#13-Roman-to-Integer" class="headerlink" title="13 Roman to Integer"></a>13 <a href="https://leetcode.com/problems/roman-to-integer/" target="_blank" rel="noopener">Roman to Integer</a></h3><h4 id="python3-using-dictionary-and-travel-backward"><a href="#python3-using-dictionary-and-travel-backward" class="headerlink" title="python3 using dictionary and travel backward:"></a><code>python3</code> using dictionary and travel backward:</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">romanToInt</span><span class="params">(self, s: str)</span> -&gt; int:</span></span><br><span class="line">        roman = &#123;<span class="string">'M'</span>:<span class="number">1000</span>, <span class="string">'D'</span>:<span class="number">500</span>, <span class="string">'C'</span>:<span class="number">100</span>, <span class="string">'L'</span>:<span class="number">50</span>, <span class="string">'X'</span>:<span class="number">10</span>, <span class="string">'V'</span>:<span class="number">5</span>, <span class="string">'I'</span>:<span class="number">1</span>&#125;</span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        prev = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> s <span class="keyword">in</span> s[::<span class="number">-1</span>]:</span><br><span class="line">            curr = roman[s]</span><br><span class="line">            <span class="keyword">if</span> prev &gt; curr:<span class="comment">#roman the latter words &gt; current words means current words is subtracted</span></span><br><span class="line">            	res -= curr</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">            	res += curr</span><br><span class="line">            prev = curr</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<h3 id="14-Longest-Common-Prefix"><a href="#14-Longest-Common-Prefix" class="headerlink" title="14 Longest Common Prefix"></a>14 <a href="https://leetcode.com/problems/longest-common-prefix/" target="_blank" rel="noopener">Longest Common Prefix</a></h3><h4 id="java"><a href="#java" class="headerlink" title="java"></a><code>java</code></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">longestCommonPrefix</span><span class="params">(String[] strs)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> pref_ind = <span class="number">0</span>, i;</span><br><span class="line">        <span class="comment">//连续三个corner case [][""]</span></span><br><span class="line">        <span class="keyword">if</span>(strs.length == <span class="number">0</span> || strs[<span class="number">0</span>].length() == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">        String res = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">char</span> pref = strs[<span class="number">0</span>].charAt(pref_ind);</span><br><span class="line">        <span class="keyword">while</span>(pref_ind &lt; strs[<span class="number">0</span>].length())&#123;</span><br><span class="line">            <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;strs.length;i++)&#123;</span><br><span class="line">                pref = strs[<span class="number">0</span>].charAt(pref_ind);</span><br><span class="line">                <span class="comment">// ["aa","a"] </span></span><br><span class="line">                <span class="keyword">if</span>( pref_ind &gt; strs[i].length()-<span class="number">1</span> || pref != strs[i].charAt(pref_ind))</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(i == strs.length)&#123;</span><br><span class="line">                res += pref;</span><br><span class="line">                pref_ind++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="28-Implement-strStr"><a href="#28-Implement-strStr" class="headerlink" title="28 Implement strStr()"></a>28 <a href="https://leetcode.com/problems/implement-strstr/" target="_blank" rel="noopener">Implement strStr()</a></h3><h4 id="c-two-pointers"><a href="#c-two-pointers" class="headerlink" title="c++ two pointers"></a><code>c++</code> two pointers</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">strStr</span><span class="params">(<span class="built_in">string</span> haystack, <span class="built_in">string</span> needle)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> end = <span class="number">0</span>, res=<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> start=<span class="number">0</span>; start&lt;haystack.size(); start++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(haystack[start] == needle[end]) end++;</span><br><span class="line">            <span class="keyword">else</span>&#123;<span class="comment">//case: when partial match and entire mach overlap, trace back</span></span><br><span class="line">                <span class="comment">//"mississippi" "issipi"</span></span><br><span class="line">                <span class="comment">//"mississippi" "issip"</span></span><br><span class="line">                start -= end;</span><br><span class="line">                end = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(end==needle.size())&#123;</span><br><span class="line">                res = start - end + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(start==haystack.size()<span class="number">-1</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> needle.size()==<span class="number">0</span>?<span class="number">0</span>:res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="c-KMP-algorithm"><a href="#c-KMP-algorithm" class="headerlink" title="c++ KMP algorithm"></a><code>c++</code> KMP algorithm</h4><p><a href>Knuth-Morris-Pratt Algorithm</a> - a string searching algorithm</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">strStr</span><span class="params">(<span class="built_in">string</span> haystack, <span class="built_in">string</span> needle)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = haystack.size(), n = needle.size();</span><br><span class="line">        <span class="keyword">if</span> (!n) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; lps = kmpProcess(needle);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>; i &lt; m;) &#123;</span><br><span class="line">            <span class="keyword">if</span> (haystack[i] == needle[j]) &#123; </span><br><span class="line">                i++, j++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (j == n) &#123;</span><br><span class="line">                <span class="keyword">return</span> i - j;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (i &lt; m &amp;&amp; haystack[i] != needle[j]) &#123;</span><br><span class="line">                j ? j = lps[j - <span class="number">1</span>] : i++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">//generate the partial match table</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; kmpProcess(<span class="built_in">string</span> needle) &#123;</span><br><span class="line">        <span class="keyword">int</span> n = needle.size();</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; lps(n, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>, len = <span class="number">0</span>; i &lt; n;) &#123;</span><br><span class="line">            <span class="keyword">if</span> (needle[i] == needle[len]) &#123;</span><br><span class="line">                lps[i++] = ++len;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (len) &#123;</span><br><span class="line">                len = lps[len - <span class="number">1</span>];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                lps[i++] = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> lps;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="67-Add-Binary"><a href="#67-Add-Binary" class="headerlink" title="67 Add Binary"></a>67 <a href="https://leetcode.com/problems/add-binary/" target="_blank" rel="noopener">Add Binary</a></h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">addBinary</span><span class="params">(<span class="built_in">string</span> a, <span class="built_in">string</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">string</span> res = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">if</span>(a.size()==<span class="number">0</span> &amp;&amp; b.size()&gt;<span class="number">0</span>) <span class="keyword">return</span> b;</span><br><span class="line">        <span class="keyword">if</span>(b.size()==<span class="number">0</span> &amp;&amp; a.size()&gt;<span class="number">0</span>) <span class="keyword">return</span> a;</span><br><span class="line">        <span class="keyword">int</span> at = <span class="number">0</span>, bt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;a.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(a[i]==<span class="string">'1'</span>)</span><br><span class="line">                at += <span class="built_in">pow</span>(<span class="number">2</span>, a.size()<span class="number">-1</span>-i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;b.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(b[i]==<span class="string">'1'</span>)</span><br><span class="line">                bt += <span class="built_in">pow</span>(<span class="number">2</span>, b.size()<span class="number">-1</span>-i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> num = at + bt;</span><br><span class="line">        <span class="comment">//decimal to binary</span></span><br><span class="line">        <span class="comment">// 4/2=2 0 2/2 = 1 0  </span></span><br><span class="line">        <span class="keyword">while</span>(num&gt;<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">char</span> c = num%<span class="number">2</span> + <span class="string">'0'</span>;</span><br><span class="line">            res = c + res;</span><br><span class="line">            num = num/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(num==<span class="number">1</span>) res = <span class="string">'1'</span> + res;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>runtime error answer. Do not convert  a whole string into an int variable, the string could be very long, which causes int overflow.</p>
+<h4 id="java-dynamic-convert-string-to-int"><a href="#java-dynamic-convert-string-to-int" class="headerlink" title="java dynamic convert string to int"></a><code>java</code> dynamic convert string to int</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">addBinary</span><span class="params">(String a, String b)</span> </span>&#123;</span><br><span class="line">        String res = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">int</span> c=<span class="number">0</span>, i=a.length()-<span class="number">1</span>, j=b.length()-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(i&gt;=<span class="number">0</span> || j&gt;=<span class="number">0</span> || c==<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="comment">//if a or b still have characters, plus it to c</span></span><br><span class="line">            c += j&gt;=<span class="number">0</span> ? b.charAt(j--) - <span class="string">'0'</span> : <span class="number">0</span>;</span><br><span class="line">            c += i&gt;=<span class="number">0</span> ? a.charAt(i--) - <span class="string">'0'</span> : <span class="number">0</span>;</span><br><span class="line">            res = Integer.valueOf(c%<span class="number">2</span>) + res;</span><br><span class="line">            c /= <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
+          
+            <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+          
+            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+          
+            <a href="/tags/string/" rel="tag"><i class="fa fa-tag"></i> string</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/31/Hash-Table/" rel="next" title="Hash Table in LeetCode">
+                <i class="fa fa-chevron-left"></i> Hash Table in LeetCode
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/25/Linked-List/" rel="prev" title="Linked List in LeetCode">
+                Linked List in LeetCode <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+    <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Shiyu Wang">
+  
+  <p class="site-author-name" itemprop="name">Shiyu Wang</p>
+  <div class="site-description motion-element" itemprop="description">Life is short, you need Python</div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span>
+        </a>
+      </div>
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+  <div class="links-of-author motion-element">
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/Wang-Shiyu" title="GitHub &rarr; https://github.com/Wang-Shiyu" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:sw71@rice.edu" title="E-Mail &rarr; mailto:sw71@rice.edu" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+
+
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#String-amp-Math"><span class="nav-number">1.</span> <span class="nav-text">String &amp; Math</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-ZigZag-Conversion"><span class="nav-number">1.1.</span> <span class="nav-text">6. ZigZag Conversion</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#c-by-rows"><span class="nav-number">1.1.1.</span> <span class="nav-text">c++ by rows</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-String-to-Integer-atoi"><span class="nav-number">1.2.</span> <span class="nav-text">8 String to Integer (atoi)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#c"><span class="nav-number">1.2.1.</span> <span class="nav-text">c++</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-Palindrome-Number"><span class="nav-number">1.3.</span> <span class="nav-text">9 Palindrome Number</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C-Revert-half-of-the-number"><span class="nav-number">1.3.1.</span> <span class="nav-text">C++ Revert half of the number</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-Integer-to-Roman"><span class="nav-number">1.4.</span> <span class="nav-text">12 Integer to Roman</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#c-amp-java"><span class="nav-number">1.4.1.</span> <span class="nav-text">c++ &amp;java</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-Roman-to-Integer"><span class="nav-number">1.5.</span> <span class="nav-text">13 Roman to Integer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#python3-using-dictionary-and-travel-backward"><span class="nav-number">1.5.1.</span> <span class="nav-text">python3 using dictionary and travel backward:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-Longest-Common-Prefix"><span class="nav-number">1.6.</span> <span class="nav-text">14 Longest Common Prefix</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#java"><span class="nav-number">1.6.1.</span> <span class="nav-text">java</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#28-Implement-strStr"><span class="nav-number">1.7.</span> <span class="nav-text">28 Implement strStr()</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#c-two-pointers"><span class="nav-number">1.7.1.</span> <span class="nav-text">c++ two pointers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-KMP-algorithm"><span class="nav-number">1.7.2.</span> <span class="nav-text">c++ KMP algorithm</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#67-Add-Binary"><span class="nav-number">1.8.</span> <span class="nav-text">67 Add Binary</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#java-dynamic-convert-string-to-int"><span class="nav-number">1.8.1.</span> <span class="nav-text">java dynamic convert string to int</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Samuel Wong</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// GET RESPONSIVE HEIGHT PASSED FROM IFRAME
+
+window.addEventListener("message", function(e) {
+  var data = e.data;
+  if ((typeof data === 'string') && (data.indexOf('ciu_embed') > -1)) {
+    var featureID = data.split(':')[1];
+    var height = data.split(':')[2];
+    $(`iframe[data-feature=${featureID}]`).height(parseInt(height) + 30);
+  }
+}, false);
+</script>
+
+
+
+
+
+
+
+
+  
+
+</body>
+</html>

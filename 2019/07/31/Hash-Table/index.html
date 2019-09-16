@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="Hash Table in LeetCodeOverviewHashTable or HashMap (denoted as $$HashMap&amp;lt;K, V&amp;gt;$$) is a data structure that can map keys to values. HashMap is unsynchronized and permits nulls(null values and nul">
+<meta name="keywords" content="C++,java,hash table">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hash Table in LeetCode">
+<meta property="og:url" content="http://SamuelWong.com/2019/07/31/Hash-Table/index.html">
+<meta property="og:site_name" content="Samuel Wong">
+<meta property="og:description" content="Hash Table in LeetCodeOverviewHashTable or HashMap (denoted as $$HashMap&amp;lt;K, V&amp;gt;$$) is a data structure that can map keys to values. HashMap is unsynchronized and permits nulls(null values and nul">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-09-16T14:37:57.822Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hash Table in LeetCode">
+<meta name="twitter:description" content="Hash Table in LeetCodeOverviewHashTable or HashMap (denoted as $$HashMap&amp;lt;K, V&amp;gt;$$) is a data structure that can map keys to values. HashMap is unsynchronized and permits nulls(null values and nul">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://SamuelWong.com/2019/07/31/Hash-Table/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>Hash Table in LeetCode | Samuel Wong</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Samuel Wong</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Learning with me</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://SamuelWong.com/2019/07/31/Hash-Table/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shiyu Wang">
+      <meta itemprop="description" content="Life is short, you need Python">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Samuel Wong">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Hash Table in LeetCode
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-31 09:56:23" itemprop="dateCreated datePublished" datetime="2019-07-31T09:56:23-04:00">2019-07-31</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-09-16 10:37:57" itemprop="dateModified" datetime="2019-09-16T10:37:57-04:00">2019-09-16</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Hash-Table-in-LeetCode"><a href="#Hash-Table-in-LeetCode" class="headerlink" title="Hash Table in LeetCode"></a>Hash Table in LeetCode</h1><h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>HashTable or HashMap (denoted as $$HashMap&lt;K, V&gt;$$) is a data structure that can map keys to values.</p>
+<p>HashMap is unsynchronized and permits nulls(null values and null key), which means it is not thread safe.</p>
+ <a id="more"></a>
+
+<p>HashMap  makes no guarantees as to the order of the map, which means it does not return the keys and values in the same order they have been inserting into the HashMap.</p>
+<h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.HashMap</span><br></pre></td></tr></table></figure>
+
+<h2 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h2><ol>
+<li>Declare</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HashMap&lt;Integer, String&gt; hmap = <span class="keyword">new</span> HashMap&lt;Integer, String&gt;();</span><br><span class="line"><span class="comment">//or Map&lt;Integer, String&gt; hmap = new HashMap&lt;Integer, String&gt;();</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>Adding elements to HashMap</p>
+<p>The function of put() is to <strong>provide</strong> an <strong>external interface</strong>, so that the HashMap object can add “key-value” to the HashMap via put() .</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hmap.put(<span class="number">1</span>,<span class="string">'a'</span>);</span><br><span class="line">hmap.put(<span class="number">3</span>,<span class="string">'c'</span>);</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>Check if the HashMap contains a certain key or value</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hmap.containsKey(<span class="number">1</span>);</span><br><span class="line">hmap.containsValue(<span class="string">'a'</span>);</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>Get the value corresponding to the key</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hmap.get(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li><p>Use iterator to traverse the map</p>
+<p>The function of <code>entrySet()</code> is to return the collection of all the entries in the HashMap. So do the  <code>valueSet()</code> and <code>keysSet()</code>.</p>
+<p>Let’s take a look at how <strong>HashMap is traversed by <code>entrySet()</code>.</strong> </p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Set set = hmap.entrySet();</span><br><span class="line">Iterator iterator = set.iterator();</span><br><span class="line"><span class="keyword">while</span>(iterator.hasNext())&#123;</span><br><span class="line">     Map.Entry mentry = (Map.Entry)iterator.next();</span><br><span class="line">     System.out.print(<span class="string">"key is: "</span>+ mentry.getKey() + <span class="string">"  Value is: "</span>);</span><br><span class="line">     System.out.println(mentry.getValue());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>Remove and clear operation</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Remove values based on key*/</span></span><br><span class="line">hmap.removes(<span class="number">1</span>);</span><br><span class="line"> <span class="comment">/* Remove all the key and value*/</span></span><br><span class="line">hmap.clear();</span><br></pre></td></tr></table></figure>
+
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://www.cnblogs.com/skywang12345/p/3310835.html" target="_blank" rel="noopener">HashMap详细介绍(源码解析)和使用示例</a></p>
+<h2 id="LeetCode-Problems"><a href="#LeetCode-Problems" class="headerlink" title="LeetCode Problems:"></a>LeetCode Problems:</h2><h3 id="3-Longest-Substring-Without-Repeating-Characters"><a href="#3-Longest-Substring-Without-Repeating-Characters" class="headerlink" title="3 Longest Substring Without Repeating Characters"></a>3 <a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/" target="_blank" rel="noopener">Longest Substring Without Repeating Characters</a></h3><p><code>two pointers</code>、<code>sliding window</code></p>
+<h4 id="java-Brute-Force-with-Hash-Set-Time-Exceed-Limit"><a href="#java-Brute-Force-with-Hash-Set-Time-Exceed-Limit" class="headerlink" title="java Brute Force with Hash Set (Time Exceed Limit)"></a><code>java</code> Brute Force with Hash Set (Time Exceed Limit)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        String tmp = <span class="keyword">new</span> String();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;s.length(); i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>; j&lt;=s.length(); j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(allUnique(s,i,j)) count = Math.max(count, j-i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">allUnique</span><span class="params">(String s, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span></span>&#123;</span><br><span class="line">        Set&lt;Character&gt; hs = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        String sub = s.substring(start,end);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;sub.length(); i++)&#123;</span><br><span class="line">            Character ch = sub.charAt(i);</span><br><span class="line">            <span class="keyword">if</span>(hs.contains(ch)) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            hs.add(ch);</span><br><span class="line">        &#125;</span><br><span class="line">ereturn <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Note:</p>
+<ul>
+<li>Just always use <code>substring</code> instead of <code>atChar</code> to add chars to string.</li>
+<li>to get the last char of a string, use <code>string.substring(string.length() - 1));</code></li>
+<li>Use the return value <code>indexOf(&#39;a&#39;)</code> to check if a single character appears in a string.</li>
+<li>It’s not permitted to add the same element into a hash set.</li>
+</ul>
+<p>Time Complexity:$ O(n^3) $: To verify the if characters with in index range <code>[i,j)</code> are all unique, we spend $$O(j-1)$$ time.</p>
+<p>Space Complexity: $$O(min(n,m))$$ , m is the size of alphabet.</p>
+<h4 id="java-Hash-Set-–-Sliding-Window-Method"><a href="#java-Hash-Set-–-Sliding-Window-Method" class="headerlink" title="java Hash Set – Sliding Window Method"></a><code>java</code> Hash Set – Sliding Window Method</h4><p><strong>A sliding window is an abstract concept commonly used in array/string problems</strong>.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">    	Set&lt;Character&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">       	<span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(i&lt;s.length() &amp;&amp; j&lt;s.length())&#123;</span><br><span class="line">            <span class="keyword">if</span>(!set.contains(s.charAt(j))&#123;</span><br><span class="line">                set.add(s.charAt(j++));</span><br><span class="line">                count = Math.max(j-i,count);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">//remove characters from the left untill there is no duplicative chars.</span></span><br><span class="line">                set.remove(s.charAt(i++));</span><br><span class="line">            &#125; </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>We use Hash set to store the characters in current window $$[i,j)$$, then slide the pointer <code>j</code> to the right until <code>s[j]</code> is already in the hash set. At this point, we record the maximum length of substring <code>s[i-j]</code> and remove <code>s[i]</code>from the left. If we do this for all <code>i</code>, we get the answer.</p>
+<p>Time Complexity:$ O(2n)  = O(n)$. </p>
+<p>Space Complexity:$ O(min(m,n)) $: size of hash set is upper bounded by the size of string s and the size of alphabet.</p>
+<p>But this solution is still not perfect. Removing <code>s[i]</code> 1 by 1 from the left is unnecessary. We can define a mapping of the characters to its index. In this wat, we can skip the repeated characters immediately by relocating <code>i</code> to <code>j+1</code>.</p>
+<h4 id="java-Sliding-Window-Optimized"><a href="#java-Sliding-Window-Optimized" class="headerlink" title="java Sliding Window Optimized"></a><code>java</code> Sliding Window Optimized</h4><p>When confliction appears, move <code>i</code> to the character next to the duplicative character. Ignore the repeated situations that take place outside $$[i,j)$$</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">    	HashMap&lt;Character, Integer&gt; hmap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">       	<span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span>(j&lt;s.length())&#123;</span><br><span class="line">            <span class="keyword">if</span>(hmap.containsKey(s.charAt(j)))&#123;</span><br><span class="line">                i = Math.max(hmap.get(s.charAt(j))+<span class="number">1</span>, i);</span><br><span class="line">            &#125;</span><br><span class="line">            hmap.put(s.charAt(j), j);</span><br><span class="line">            count = Math.max(j-i+<span class="number">1</span>, count);</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Time complexity : $$ O(n) $$ </li>
+<li>Space complexity : $$O(min(m, n))$$</li>
+</ul>
+<h4 id="python3-Brute-Force"><a href="#python3-Brute-Force" class="headerlink" title="python3 Brute Force"></a><code>python3</code> Brute Force</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(self, s: str)</span> -&gt; int:</span></span><br><span class="line">        r = <span class="string">''</span></span><br><span class="line">        d = <span class="string">''</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</span><br><span class="line">            <span class="keyword">if</span> s[i] <span class="keyword">not</span> <span class="keyword">in</span> r:</span><br><span class="line">                r = r + s[i]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="string">'''</span></span><br><span class="line"><span class="string">                pwwkeqwveeew</span></span><br><span class="line"><span class="string">                --wkeq w-&gt;else s[i] = 'w'</span></span><br><span class="line"><span class="string">                ---- r = 'wkeq' d = 'pw'</span></span><br><span class="line"><span class="string">                '''</span></span><br><span class="line">                <span class="keyword">if</span> len(r) &gt; len(d):</span><br><span class="line">                    d = r</span><br><span class="line">                r = r[r.index(s[i])+<span class="number">1</span>:] + s[i]</span><br><span class="line">                <span class="comment">#--end else r = 'w'</span></span><br><span class="line">        <span class="comment">#--end for r = - r + s[i]--last char </span></span><br><span class="line">        <span class="keyword">return</span> max(len(d), len(r))</span><br></pre></td></tr></table></figure>
+
+<p>straight and cool When <code>s[i]</code> is  in <code>r</code>, del the duplicative one and then add <code>s[i]</code> to <code>r</code> </p>
+<h4 id="python3-Hash-table"><a href="#python3-Hash-table" class="headerlink" title="python3 Hash table"></a><code>python3</code> Hash table</h4><p>find the index of the duplicative character and mark the location as <code>start</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(self, s: str)</span> -&gt; int:</span></span><br><span class="line">        mdict = &#123;&#125;</span><br><span class="line">        ans = start = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> index, value <span class="keyword">in</span> enumerate(s):</span><br><span class="line">            <span class="keyword">if</span> value <span class="keyword">in</span> mdict <span class="keyword">and</span> mdict[value]&gt;=start:</span><br><span class="line">                start = mdict[value] + <span class="number">1</span></span><br><span class="line">            mdict[value] = index</span><br><span class="line">            ans = max(ans, index - start + <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+
+<p><strong>The last 3 methods all use the sliding window and hash map.</strong></p>
+<h3 id="1-Two-Sum"><a href="#1-Two-Sum" class="headerlink" title="1 Two Sum"></a>1 <a href="https://leetcode.com/problems/two-sum/" target="_blank" rel="noopener">Two Sum</a></h3><p><code>Array</code>, <code>hash table</code></p>
+<h4 id="java-one-pass-hash-table"><a href="#java-one-pass-hash-table" class="headerlink" title="java one-pass hash table"></a><code>java</code> one-pass hash table</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] twoSum(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target) &#123;</span><br><span class="line">		Map&lt;Integer, Integer&gt; t = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;nums.length; i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> complement = target - nums[i];</span><br><span class="line">            <span class="keyword">if</span>(t.containsKey(complement))</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;t.get(complement),i&#125;;</span><br><span class="line">            t.put(nums[i],i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"No two sum solution"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Time complexity : $$O(n)$$</p>
+<h3 id="36-Valid-Sudoku"><a href="#36-Valid-Sudoku" class="headerlink" title="36. Valid Sudoku"></a>36. <a href="https://leetcode.com/problems/valid-sudoku/" target="_blank" rel="noopener">Valid Sudoku</a></h3><h4 id="java-Hash-Set"><a href="#java-Hash-Set" class="headerlink" title="java Hash Set"></a><code>java</code> Hash Set</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isValidSudoku</span><span class="params">(<span class="keyword">char</span>[][] board)</span> </span>&#123;</span><br><span class="line">        Set&lt;String&gt; sudoku = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">9</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;<span class="number">9</span>; j++)&#123;</span><br><span class="line">                <span class="keyword">char</span> c = board[i][j];</span><br><span class="line">                <span class="keyword">if</span>(c!=<span class="string">'.'</span>)&#123;</span><br><span class="line">                    <span class="comment">//use signs to classify, amazing use of !set.add()</span></span><br><span class="line">                    <span class="keyword">if</span>(!sudoku.add(c+<span class="string">"row"</span>+i)</span><br><span class="line">                       ||!sudoku.add(c+<span class="string">"column"</span>+j)</span><br><span class="line">                       ||!sudoku.add(c+<span class="string">"block"</span>+i/<span class="number">3</span>+j/<span class="number">3</span>)) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Time complexity: $ O(1)$</p>
+<h3 id="49-Group-Anagrams"><a href="#49-Group-Anagrams" class="headerlink" title="49 Group Anagrams"></a>49 <a href="https://leetcode.com/problems/group-anagrams/" target="_blank" rel="noopener">Group Anagrams</a></h3><h4 id="c-unordered-map"><a href="#c-unordered-map" class="headerlink" title="c++unordered map"></a><code>c++</code>unordered map</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; groupAnagrams(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; strs) &#123;</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; ump;</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">string</span> str : strs)&#123;</span><br><span class="line">            <span class="built_in">string</span> t = str;</span><br><span class="line">            sort(t.begin(), t.end());</span><br><span class="line">            ump[t].push_back(str);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; res;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> mp : ump)&#123;</span><br><span class="line">            res.push_back(mp.second);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>Time complexity: $O(nklogk) $</p>
+<p>N is the length of the strs, K is the length of the str, logk is the sort time of each str.</p>
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
+          
+            <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+          
+            <a href="/tags/hash-table/" rel="tag"><i class="fa fa-tag"></i> hash table</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/25/LeetCode-Problems-In-Order/" rel="next" title="Linked List in LeetCode">
+                <i class="fa fa-chevron-left"></i> Linked List in LeetCode
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/05/String&Math/" rel="prev" title="String in LeetCode">
+                String in LeetCode <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+    <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Shiyu Wang">
+  
+  <p class="site-author-name" itemprop="name">Shiyu Wang</p>
+  <div class="site-description motion-element" itemprop="description">Life is short, you need Python</div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span>
+        </a>
+      </div>
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+  <div class="links-of-author motion-element">
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/Wang-Shiyu" title="GitHub &rarr; https://github.com/Wang-Shiyu" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:sw71@rice.edu" title="E-Mail &rarr; mailto:sw71@rice.edu" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+
+
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hash-Table-in-LeetCode"><span class="nav-number">1.</span> <span class="nav-text">Hash Table in LeetCode</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Overview"><span class="nav-number">1.1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usage"><span class="nav-number">1.2.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Methods"><span class="nav-number">1.3.</span> <span class="nav-text">Methods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">1.4.</span> <span class="nav-text">Reference</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LeetCode-Problems"><span class="nav-number">1.5.</span> <span class="nav-text">LeetCode Problems:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Longest-Substring-Without-Repeating-Characters"><span class="nav-number">1.5.1.</span> <span class="nav-text">3 Longest Substring Without Repeating Characters</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#java-Brute-Force-with-Hash-Set-Time-Exceed-Limit"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">java Brute Force with Hash Set (Time Exceed Limit)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#java-Hash-Set-–-Sliding-Window-Method"><span class="nav-number">1.5.1.2.</span> <span class="nav-text">java Hash Set – Sliding Window Method</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#java-Sliding-Window-Optimized"><span class="nav-number">1.5.1.3.</span> <span class="nav-text">java Sliding Window Optimized</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python3-Brute-Force"><span class="nav-number">1.5.1.4.</span> <span class="nav-text">python3 Brute Force</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python3-Hash-table"><span class="nav-number">1.5.1.5.</span> <span class="nav-text">python3 Hash table</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Two-Sum"><span class="nav-number">1.5.2.</span> <span class="nav-text">1 Two Sum</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#java-one-pass-hash-table"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">java one-pass hash table</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#36-Valid-Sudoku"><span class="nav-number">1.5.3.</span> <span class="nav-text">36. Valid Sudoku</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#java-Hash-Set"><span class="nav-number">1.5.3.1.</span> <span class="nav-text">java Hash Set</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#49-Group-Anagrams"><span class="nav-number">1.5.4.</span> <span class="nav-text">49 Group Anagrams</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#c-unordered-map"><span class="nav-number">1.5.4.1.</span> <span class="nav-text">c++unordered map</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Samuel Wong</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// GET RESPONSIVE HEIGHT PASSED FROM IFRAME
+
+window.addEventListener("message", function(e) {
+  var data = e.data;
+  if ((typeof data === 'string') && (data.indexOf('ciu_embed') > -1)) {
+    var featureID = data.split(':')[1];
+    var height = data.split(':')[2];
+    $(`iframe[data-feature=${featureID}]`).height(parseInt(height) + 30);
+  }
+}, false);
+</script>
+
+
+
+
+
+
+
+
+  
+
+</body>
+</html>

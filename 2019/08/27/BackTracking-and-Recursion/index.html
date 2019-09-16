@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="This is a notebook that recoding common used algorithms and methods implemented by backtracking and recursion.">
+<meta name="keywords" content="C++,java,Dynamic Programming,Recursion,DFS,BFS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BackTracking and Recursion in LeetCode">
+<meta property="og:url" content="http://SamuelWong.com/2019/08/27/BackTracking-and-Recursion/index.html">
+<meta property="og:site_name" content="Samuel Wong">
+<meta property="og:description" content="This is a notebook that recoding common used algorithms and methods implemented by backtracking and recursion.">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-09-16T14:41:04.465Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BackTracking and Recursion in LeetCode">
+<meta name="twitter:description" content="This is a notebook that recoding common used algorithms and methods implemented by backtracking and recursion.">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://SamuelWong.com/2019/08/27/BackTracking-and-Recursion/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>BackTracking and Recursion in LeetCode | Samuel Wong</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Samuel Wong</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Learning with me</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://SamuelWong.com/2019/08/27/BackTracking-and-Recursion/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shiyu Wang">
+      <meta itemprop="description" content="Life is short, you need Python">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Samuel Wong">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">BackTracking and Recursion in LeetCode
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-08-27 17:25:24" itemprop="dateCreated datePublished" datetime="2019-08-27T17:25:24-04:00">2019-08-27</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-09-16 10:41:04" itemprop="dateModified" datetime="2019-09-16T10:41:04-04:00">2019-09-16</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>This is a notebook that recoding common used algorithms and methods implemented by backtracking and recursion.</p>
+ <a id="more"></a>
+
+<h2 id="BackTracking-and-Recursion"><a href="#BackTracking-and-Recursion" class="headerlink" title="BackTracking and Recursion"></a>BackTracking and Recursion</h2><h3 id="17-Letter-Combinations-of-a-Phone-Number"><a href="#17-Letter-Combinations-of-a-Phone-Number" class="headerlink" title="17 Letter Combinations of a Phone Number"></a>17 <a href="https://leetcode.com/problems/letter-combinations-of-a-phone-number/" target="_blank" rel="noopener">Letter Combinations of a Phone Number</a></h3><p>do it again.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    Map&lt;String, String&gt; phone = <span class="keyword">new</span> HashMap&lt;String, String&gt;()&#123;</span><br><span class="line">       &#123;</span><br><span class="line">        put(<span class="string">"2"</span>, <span class="string">"abc"</span>);</span><br><span class="line">        put(<span class="string">"3"</span>, <span class="string">"def"</span>);</span><br><span class="line">        put(<span class="string">"4"</span>, <span class="string">"ghi"</span>);</span><br><span class="line">        put(<span class="string">"5"</span>, <span class="string">"jkl"</span>);</span><br><span class="line">        put(<span class="string">"6"</span>, <span class="string">"mno"</span>);</span><br><span class="line">        put(<span class="string">"7"</span>, <span class="string">"pqrs"</span>);</span><br><span class="line">        put(<span class="string">"8"</span>, <span class="string">"tuv"</span>);</span><br><span class="line">        put(<span class="string">"9"</span>, <span class="string">"wxyz"</span>);</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    List&lt;String&gt; output = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">letterCombinations</span><span class="params">(String digits)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(digits.length()!=<span class="number">0</span>)</span><br><span class="line">            recursion(<span class="string">""</span>, digits);</span><br><span class="line">        <span class="keyword">return</span> output;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">recursion</span><span class="params">(String combination, String next)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(next.length() == <span class="number">0</span>)</span><br><span class="line">            output.add(combination);</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            String digit = next.substring(<span class="number">0</span>,<span class="number">1</span>);</span><br><span class="line">            String letters = phone.get(digit);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;letters.length();i++)&#123;</span><br><span class="line">                String letter = phone.get(digit).substring(i,i+<span class="number">1</span>);</span><br><span class="line">                recursion(combination + letter, next.substring(<span class="number">1</span>));</span><br><span class="line">                <span class="comment">//Begin the extraction at position 1, and extract the rest</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="22-Generate-Parentheses"><a href="#22-Generate-Parentheses" class="headerlink" title="22 Generate Parentheses"></a>22 <a href="https://leetcode.com/problems/generate-parentheses/" target="_blank" rel="noopener">Generate Parentheses</a></h3><h4 id="c-recursion"><a href="#c-recursion" class="headerlink" title="c++ recursion"></a><code>c++</code> recursion</h4><pre><code>//递归思路 一个存上个地点的pointer
+/*
+[2,3,6,7]
+2 - 2 - 2 - 2(&gt;7)
+2 - 2 - 3(=7) add combination
+2 - 3 - 3(&gt;7)
+2 - 6
+3 - 3 - 3
+3 - 6
+6 - 6
+7
+end
+*/</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; generateParenthesis(<span class="keyword">int</span> n) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; res;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        list all the 2^(2*n)results and check if each one is valid</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        recursion, P(char[2*n], int pos, vector&lt;string&gt; result)</span></span><br><span class="line"><span class="comment">        in each step:</span></span><br><span class="line"><span class="comment">            s[pos] = '('</span></span><br><span class="line"><span class="comment">        if invalid</span></span><br><span class="line"><span class="comment">            s[pos] = ')'</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        <span class="function"><span class="built_in">string</span> <span class="title">s</span><span class="params">(<span class="number">2</span>*n, <span class="string">' '</span>)</span></span>;</span><br><span class="line">        generate(s, <span class="number">0</span>, res);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//why need a `&amp;`</span></span><br><span class="line">    <span class="comment">//When a vector is passed to a function, a copy of the vector is created.  So it is a good idea to pass by reference.</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">generate</span><span class="params">(<span class="built_in">string</span> str, <span class="keyword">int</span> pos, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; &amp;res)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(pos == str.size())&#123;</span><br><span class="line">            <span class="keyword">if</span>(valid(str))&#123;</span><br><span class="line">                res.push_back(str);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            str[pos] = <span class="string">'('</span>;</span><br><span class="line">            generate(str, pos+<span class="number">1</span>, res);</span><br><span class="line">            str[pos] = <span class="string">')'</span>;</span><br><span class="line">            generate(str, pos+<span class="number">1</span>, res);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">valid</span><span class="params">(<span class="built_in">string</span> s)</span></span>&#123;</span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">char</span>&gt; stk;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">char</span> c : s)&#123;</span><br><span class="line">            <span class="keyword">if</span>(c==<span class="string">')'</span> &amp;&amp; !stk.empty())&#123;</span><br><span class="line">                <span class="keyword">if</span>(stk.top()!=<span class="string">'('</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                <span class="keyword">else</span> stk.pop();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> stk.push(c);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> stk.empty()?<span class="literal">true</span>:<span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="39-Combination-Sum"><a href="#39-Combination-Sum" class="headerlink" title="39 Combination Sum"></a>39 <a href="https://leetcode.com/problems/combination-sum/" target="_blank" rel="noopener">Combination Sum</a></h3><h4 id="c-backtracking"><a href="#c-backtracking" class="headerlink" title="c++ backtracking"></a><code>c++</code> backtracking</h4><p>递归思路 一个存上个地点的pointer<br>    [2,3,6,7]<br>    2 - 2 - 2 - 2(&gt;7)<br>    2 - 2 - 3(=7) add combination<br>    2 - 3 - 3(&gt;7)<br>    2 - 6<br>    3 - 3 - 3<br>    3 - 6<br>    6 - 6<br>    7</p>
+<p>end</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; combinationSum(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; candidates, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        sort(candidates.begin(), candidates.end());</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; combination;</span><br><span class="line">        combineSum(res, candidates, combination, target, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">combineSum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; res, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; candidates, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; combination, <span class="keyword">int</span> target, <span class="keyword">int</span> begin)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!target)&#123;</span><br><span class="line">            res.push_back(combination);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=begin; i!=candidates.size()&amp;&amp;target&gt;=candidates[i];i++)&#123;</span><br><span class="line">            combination.push_back(candidates[i]);</span><br><span class="line">            combineSum(res, candidates, combination, target - candidates[i],i);</span><br><span class="line">            combination.pop_back();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="40-Combination-Sum-ii"><a href="#40-Combination-Sum-ii" class="headerlink" title="40 Combination Sum ii"></a>40 <a href="https://leetcode.com/problems/combination-sum-ii/" target="_blank" rel="noopener">Combination Sum ii</a></h3><h4 id="c-recursion-1"><a href="#c-recursion-1" class="headerlink" title="c++ recursion"></a><code>c++</code> recursion</h4><p>递归思路<br>   1,1,2,5,6,7,10<br>    1-1-2-5(&gt;8)<br>    1-1-5-6(&gt;8)<br>    1-1-6(=8) combination push<br>    1-2-5(=8) combination push<br>    1-5-6(&gt;8)<br>    1-6-7(&gt;8)<br>    1-7(=8) combination push<br>    2-5-6(&gt;8)<br>    2-6(=8) combination push<br>    5-6(&gt;8) 6-7(&gt;8) </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; combinationSum2(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; candidates, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        sort(candidates.begin(), candidates.end());</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; combination;</span><br><span class="line">        combineSumII(res, candidates, combination, target, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">combineSumII</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; res, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; candidates, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; combination, <span class="keyword">int</span> target, <span class="keyword">int</span> begin)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!target)&#123;</span><br><span class="line">            res.push_back(combination);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = begin; i&lt;candidates.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(candidates[i] &gt; target)&#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(candidates[i]&lt;=target)&#123;</span><br><span class="line">                <span class="comment">//avoid dupicates of 1,2,5 1,7 -&gt; 1,2,5 1,7 -&gt; 2, 6</span></span><br><span class="line">                <span class="keyword">if</span>(i==begin || candidates[i]!=candidates[i<span class="number">-1</span>])&#123;</span><br><span class="line">                    combination.push_back(candidates[i]);</span><br><span class="line">                    combineSumII(res, candidates, combination, target-candidates[i], i+<span class="number">1</span>);</span><br><span class="line">                    combination.pop_back();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="46-permutation"><a href="#46-permutation" class="headerlink" title="46 permutation"></a>46 <a href="https://leetcode.com/problems/permutations/" target="_blank" rel="noopener">permutation</a></h3><h4 id="java-backtrack"><a href="#java-backtrack" class="headerlink" title="java backtrack"></a><code>java</code> backtrack</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; permute(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">        <span class="comment">//Arrays.sort(nums);not necessary</span></span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        List&lt;Integer&gt; combination = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        1,2,3</span></span><br><span class="line"><span class="comment">        1,3,2</span></span><br><span class="line"><span class="comment">        2,1,3</span></span><br><span class="line"><span class="comment">        2,3,1</span></span><br><span class="line"><span class="comment">        3,1,2</span></span><br><span class="line"><span class="comment">        3,2,1</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        permutation(nums, res, combination);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">permutation</span><span class="params">(<span class="keyword">int</span>[] nums, List&lt;List&lt;Integer&gt;&gt; res, List&lt;Integer&gt; combination )</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(combination.size()==nums.length)&#123;<span class="comment">//list.size()</span></span><br><span class="line">            res.add(<span class="keyword">new</span> ArrayList&lt;&gt;(combination));<span class="comment">//why new</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;nums.length; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(combination.contains(nums[i])) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                combination.add(nums[i]);</span><br><span class="line">                permutation(nums, res, combination);</span><br><span class="line">                combination.remove(combination.size()-<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>the contains operation will cost O(n), use Set</p>
+<h3 id="47-Permutations-II"><a href="#47-Permutations-II" class="headerlink" title="47 Permutations II"></a>47 <a href="https://leetcode.com/problems/permutations-ii/" target="_blank" rel="noopener">Permutations II</a></h3><h4 id="java-recursion-dfs"><a href="#java-recursion-dfs" class="headerlink" title="java recursion / dfs"></a><code>java</code> recursion / dfs</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; permuteUnique(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">        List&lt;Integer&gt; combination = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        Arrays.sort(nums);<span class="comment">//necessary</span></span><br><span class="line">        permutationII(res, combination, nums, <span class="keyword">new</span> <span class="keyword">boolean</span>[nums.length]);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    1,1,1,2,3</span></span><br><span class="line"><span class="comment">    1,1,1,3,2</span></span><br><span class="line"><span class="comment">    1,1,</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">permutationII</span><span class="params">(List&lt;List&lt;Integer&gt;&gt; res, List&lt;Integer&gt; combination, <span class="keyword">int</span>[] nums, <span class="keyword">boolean</span>[] used)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(combination.size() == nums.length)&#123;</span><br><span class="line">            res.add(<span class="keyword">new</span> ArrayList&lt;&gt;(combination));</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;nums.length; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(used[i] || i&gt;<span class="number">0</span>&amp;&amp;nums[i]==nums[i-<span class="number">1</span>]&amp;&amp;!used[i-<span class="number">1</span>]) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="comment">//when a number has the same value with its previous, we can use this number only if his previous is used</span></span><br><span class="line">            used[i] = <span class="keyword">true</span>;</span><br><span class="line">            combination.add(nums[i]);</span><br><span class="line">            permutationII(res, combination, nums, used);</span><br><span class="line">            used[i] = <span class="keyword">false</span>;</span><br><span class="line">            combination.remove(combination.size()-<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>The worst-case time complexity is O(n! * n).</p>
+<p>For any recursive function, the time complexity is O(branches^depth) * amount of work at each node in the recursive call tree. However, in this case, we have n<em>(n-1)</em>(n<em>2)</em>(n-3)<em>…</em>1 branches at each level = n!, so the total recursive calls is O(n!)<br>We do n-amount of work in each node of the recursive call tree, (a) the for-loop and (b) at each leaf when we add n elements to an ArrayList. So this is a total of O(n) additional work per node.<br>Therefore, the upper-bound time complexity is O(n! * n).</p>
+<p>We can do some optimizations on the above code:</p>
+<p>Only considering unique elements<br>Add each unique element (as a key) and its frequency (as the value) to a Hash Table<br>Iterate through each key of the Hash Table, and decrease the quantity of each element we use in each recursive call<br>Advantages of the optimized approach:</p>
+<p>Reduce the size of the for-loop – rather than iterating through ALL of the elements of the array, we only need to iterate through the unique elements<br>Sorting step also becomes unnecessary<br>Minimize the space complexity; we don’t need to allocate a huge array when we have many duplicates<br>Through some involved math we can probably derive a tighter upper bound for this approach, since we are doing less work at each level, e.g. n amount of work at each of the first level nodes, n-1 amount of work at each of the second level nodes, etc, but for our (interview) purposes the best upper bound is still the same, equal to O(n! * n).</p>
+<p>Here’s the code for the optimized solution (accepted).</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; permuteUnique(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; results = <span class="keyword">new</span> ArrayList&lt;List&lt;Integer&gt;&gt;();</span><br><span class="line">        <span class="keyword">if</span>(nums == <span class="keyword">null</span> || nums.length == <span class="number">0</span>) <span class="keyword">return</span> results;</span><br><span class="line">        Map&lt;Integer,Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> n : nums) &#123;</span><br><span class="line">            map.put(n,map.getOrDefault(n,<span class="number">0</span>)+<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        permuteUniqueHelper(map, nums.length, <span class="keyword">new</span> Integer[nums.length], <span class="number">0</span>, results);</span><br><span class="line">        <span class="keyword">return</span> results;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">permuteUniqueHelper</span><span class="params">(Map&lt;Integer,Integer&gt; m, <span class="keyword">int</span> l, Integer[] p, <span class="keyword">int</span> i, List&lt;List&lt;Integer&gt;&gt; r)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(i == l) &#123;</span><br><span class="line">            r.add(Arrays.asList(Arrays.copyOf(p,l)));</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> key : m.keySet()) &#123;</span><br><span class="line">            <span class="keyword">if</span>(m.get(key) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                m.put(key,m.get(key)-<span class="number">1</span>);</span><br><span class="line">                p[i] = key;</span><br><span class="line">                permuteUniqueHelper(m,l,p,i+<span class="number">1</span>,r);</span><br><span class="line">                m.put(key,m.get(key)+<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="55-jump-game"><a href="#55-jump-game" class="headerlink" title="55 jump-game"></a>55 <a href="https://leetcode.com/problems/jump-game" target="_blank" rel="noopener">jump-game</a></h3><p>This is a dynamic programming<a href="https://leetcode.com/problems/jump-game/solution/#fn1" target="_blank" rel="noopener">[1]</a> question. Usually, solving and fully understanding a dynamic programming problem is a 4 step process:</p>
+<ol>
+<li>Start with the recursive backtracking solution</li>
+<li>Optimize by using a memoization table (top-down<a href="https://leetcode.com/problems/jump-game/solution/#fn2" target="_blank" rel="noopener">[2]</a> dynamic programming)</li>
+<li>Remove the need for recursion (bottom-up dynamic programming)</li>
+<li>Apply final tricks to reduce the time / memory complexity</li>
+</ol>
+<p>All solutions presented below produce the correct result, but they differ in run time and memory requirements.</p>
+<h4 id="c-recursion-time-limit-exceeded"><a href="#c-recursion-time-limit-exceeded" class="headerlink" title="c++ recursion time limit exceeded"></a><code>c++</code> recursion time limit exceeded</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">canJump</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Jump(nums, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">Jump</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> start)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(start == nums.size()<span class="number">-1</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">int</span> reach = nums.size()<span class="number">-1</span>&lt;(start + nums[start]) ? nums.size()<span class="number">-1</span> : start + nums[start] ;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> next = start+<span class="number">1</span>; next&lt;=reach; next++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(Jump(nums, next))</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="60-Permutation-Sequence"><a href="#60-Permutation-Sequence" class="headerlink" title="60 Permutation Sequence"></a>60 <a href="https://leetcode.com/problems/permutation-sequence/" target="_blank" rel="noopener">Permutation Sequence</a></h3><p>Use the order and index of permutation  sequence. Find the right digit from left to right.</p>
+<p>say n = 4, you have {1, 2, 3, 4}</p>
+<p>If you were to list out all the permutations you have</p>
+<p>1 + (permutations of 2, 3, 4)</p>
+<p>2 + (permutations of 1, 3, 4)</p>
+<p>3 + (permutations of 1, 2, 4)</p>
+<p>4 + (permutations of 1, 2, 3)</p>
+<p>We know how to calculate the number of permutations of n numbers… n! So each of those with permutations of 3 numbers means there are 6 possible permutations. Meaning there would be a total of 24 permutations in this particular one. So if you were to look for the (k = 14) 14th permutation, it would be in the</p>
+<p>3 + (permutations of 1, 2, 4) subset.</p>
+<p>To programmatically get that, you take k = 13 (subtract 1 because of things always starting at 0) and divide that by the 6 we got from the factorial, which would give you the index of the number you want. In the array {1, 2, 3, 4}, k/(n-1)! = 13/(4-1)! = 13/3! = 13/6 = 2. The array {1, 2, 3, 4} has a value of 3 at index 2. So the first number is a 3.</p>
+<p>Then the problem repeats with less numbers.</p>
+<p>The permutations of {1, 2, 4} would be:</p>
+<p>1 + (permutations of 2, 4)</p>
+<p>2 + (permutations of 1, 4)</p>
+<p>4 + (permutations of 1, 2)</p>
+<p>But our k is no longer the 14th, because in the previous step, we’ve already eliminated the 12 4-number permutations starting with 1 and 2. So you subtract 12 from k.. which gives you 1. Programmatically that would be…</p>
+<p>k = k - (index from previous) * (n-1)! = k - 2<em>(n-1)! = 13 - 2</em>(3)! = 1</p>
+<p>In this second step, permutations of 2 numbers has only 2 possibilities, meaning each of the three permutations listed above a has two possibilities, giving a total of 6. We’re looking for the first one, so that would be in the 1 + (permutations of 2, 4) subset.</p>
+<p>Meaning: index to get number from is k / (n - 2)! = 1 / (4-2)! = 1 / 2! = 0.. from {1, 2, 4}, index 0 is 1<br>so the numbers we have so far is 3, 1… and then repeating without explanations.</p>
+<p>{2, 4}</p>
+<p>k = k - (index from pervious) * (n-2)! = k - 0 * (n - 2)! = 1 - 0 = 1;</p>
+<p>third number’s index = k / (n - 3)! = 1 / (4-3)! = 1/ 1! = 1… from {2, 4}, index 1 has 4</p>
+<p>Third number is 4</p>
+<p>{2}</p>
+<p>k = k - (index from pervious) * (n - 3)! = k - 1 * (4 - 3)! = 1 - 1 = 0;</p>
+<p>third number’s index = k / (n - 4)! = 0 / (4-4)! = 0/ 1 = 0… from {2}, index 0 has 2</p>
+<p>Fourth number is 2</p>
+<p>Giving us 3142. If you manually list out the permutations using DFS method, it would be 3142. Done! It really was all about pattern finding.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPermutation</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        List&lt;Integer&gt; numbers = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">int</span>[] factorial = <span class="keyword">new</span> <span class="keyword">int</span>[n+<span class="number">1</span>];</span><br><span class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; i++)&#123;</span><br><span class="line">            numbers.add(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> mul = <span class="number">1</span>;</span><br><span class="line">        factorial[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; i++)&#123;</span><br><span class="line">            mul *= i;</span><br><span class="line">            factorial[i] = mul;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        k--;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> index = k/factorial[n-i];</span><br><span class="line">            sb.append(String.valueOf(numbers.get(index)));</span><br><span class="line">            numbers.remove(index);</span><br><span class="line">            k -= index* factorial[n-i];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="78-subsets"><a href="#78-subsets" class="headerlink" title="78 subsets"></a>78 <a href="https://leetcode.com/problems/subsets/" target="_blank" rel="noopener">subsets</a></h3><h4 id="c-recursion-2"><a href="#c-recursion-2" class="headerlink" title="c++ recursion"></a><code>c++</code> recursion</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; subsets(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        <span class="keyword">int</span> n = nums.size();</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; subset;</span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        generatesubset(res, subset, nums, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">generatesubset</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; res, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; subset, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> start)</span></span>&#123;</span><br><span class="line">        <span class="comment">//1 step deep, add to res</span></span><br><span class="line">        res.push_back(subset);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = start; i &lt; nums.size(); i++)&#123;</span><br><span class="line">            subset.push_back(nums[i]);</span><br><span class="line">            <span class="comment">//put 1, start DFS</span></span><br><span class="line">            generatesubset(res, subset, nums, i+<span class="number">1</span>);</span><br><span class="line">            subset.pop_back();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//[] 0 end</span></span><br><span class="line">        <span class="comment">//[1] 0 [2] 1 [3] 2 pop</span></span><br><span class="line">        <span class="comment">//[1,2] 1 [1,3] 2 pop [2,3] 2 pop [3] pop</span></span><br><span class="line">        <span class="comment">//[1,2,3] 2 pop [1,3] pop [2,3] pop</span></span><br><span class="line">        <span class="comment">//[1,2,3] pop</span></span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="90-subset-II"><a href="#90-subset-II" class="headerlink" title="90 subset II"></a>90 <a href="https://leetcode.com/problems/subsets-ii/" target="_blank" rel="noopener">subset II</a></h3><p>the difference is that the array contains duplicates. The same as Permutation II.</p>
+<h4 id="c-using-previous-subset-counting-the-duplicates"><a href="#c-using-previous-subset-counting-the-duplicates" class="headerlink" title="c++using previous subset, counting the duplicates"></a><code>c++</code>using previous subset, counting the duplicates</h4><p>To solve this problem, it is helpful to first think how many subsets are there. If there is no duplicate element, the answer is simply 2^n, where n is the number of elements. This is because you have two choices for each element, either putting it into the subset or not. So all subsets for this no-duplicate set can be easily constructed:<br>num of subset</p>
+<ul>
+<li>(1 to 2^0) empty set is the first subset</li>
+<li>(2^0+1 to 2^1) add the first element into subset from (1)</li>
+<li>(2^1+1 to 2^2) add the second element into subset (1 to 2^1)</li>
+<li>(2^2+1 to 2^3) add the third element into subset (1 to 2^2)</li>
+<li>….</li>
+<li>(2^(n-1)+1 to 2^n) add the nth element into subset(1 to 2^(n-1))</li>
+</ul>
+<p>Then how many subsets are there if there are duplicate elements? We can treat duplicate element as a special element. For example, if we have duplicate elements (5, 5), instead of treating them as two elements that are duplicate, we can treat it as one special element 5, but this element has more than two choices: you can either NOT put it into the subset, or put ONE 5 into the subset, or put TWO 5s into the subset. Therefore, we are given an array (a1, a2, a3, …, an) with each of them appearing (k1, k2, k3, …, kn) times, the number of subset is (k1+1)<em>(k2+1)</em>…(kn+1). We can easily see how to write down all the subsets similar to the approach above.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; subsetsWithDup(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        vector&lt;vector&lt;int&gt;&gt; res = &#123;&#123;&#125;&#125;;//empty set</span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        for(int i=0; i&lt;nums.size();)&#123;</span><br><span class="line">            //1.find out the number of duplicates of ith item</span><br><span class="line">            int count = 0;</span><br><span class="line">            while(count + i &lt;nums.size() &amp;&amp; nums[i+count] == nums[i] ) count++;</span><br><span class="line">            //2. use the previous subset</span><br><span class="line">            int prevN = res.size();</span><br><span class="line">            for(int j=0; j&lt;prevN; j++)&#123;</span><br><span class="line">                vector&lt;int&gt; prevsubset = res[j];//most tricky step</span><br><span class="line">                //3. add all the duplicates into the subset</span><br><span class="line">                for(int k=0; k&lt;count; k++)&#123;</span><br><span class="line">                    prevsubset.push_back(nums[i]);//k*nums[i]</span><br><span class="line">                    res.push_back(prevsubset);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            //4. skip all duplicates nums[i]</span><br><span class="line">            i+=count;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="79-word-search"><a href="#79-word-search" class="headerlink" title="79 word search"></a>79 <a href="https://leetcode.com/problems/word-search/" target="_blank" rel="noopener">word search</a></h3><h4 id="c-backtracking-and-recursion-DFS"><a href="#c-backtracking-and-recursion-DFS" class="headerlink" title="c++ backtracking and recursion | DFS"></a><code>c++</code> backtracking and recursion | DFS</h4><p>double loop to visit every item</p>
+<p>when find the first character, begin searching its neighbors. recurve this process.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">exist</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt;&gt;&amp; board, <span class="built_in">string</span> word)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(word.size())&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;board.size(); i++)</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j&lt;board[<span class="number">0</span>].size(); j++)</span><br><span class="line">                    <span class="keyword">if</span>(search(board, word, i, j, <span class="number">0</span> ,word.size())) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">search</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt;&gt;&amp; board, <span class="built_in">string</span> word, <span class="keyword">int</span> startr, <span class="keyword">int</span> startc, <span class="keyword">int</span> start, <span class="keyword">int</span> l)</span></span>&#123;</span><br><span class="line">        <span class="keyword">char</span> curr;</span><br><span class="line">        <span class="keyword">bool</span> res = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>((curr=board[startr][startc]) != word[start]) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(start == l<span class="number">-1</span>) <span class="keyword">return</span> <span class="literal">true</span>; <span class="comment">//all match</span></span><br><span class="line">        board[startr][startc] = <span class="string">'*'</span>;</span><br><span class="line">        <span class="keyword">if</span>(startr&gt;<span class="number">0</span>) res = search(board, word, startr<span class="number">-1</span>, startc, start+<span class="number">1</span>, l);<span class="comment">//up</span></span><br><span class="line">        <span class="keyword">if</span>(!res &amp;&amp; startr&lt;board.size()<span class="number">-1</span>) res = search(board, word, startr+<span class="number">1</span>, startc, start+<span class="number">1</span>, l);<span class="comment">//down</span></span><br><span class="line">        <span class="keyword">if</span>(!res &amp;&amp; startc&gt;<span class="number">0</span>) res = search(board, word, startr, startc<span class="number">-1</span>, start+<span class="number">1</span>, l);<span class="comment">//left</span></span><br><span class="line">        <span class="keyword">if</span>(!res &amp;&amp; startc&lt;board[<span class="number">0</span>].size()<span class="number">-1</span>) res = search(board, word, startr, startc+<span class="number">1</span>,start+<span class="number">1</span>, l);<span class="comment">//right</span></span><br><span class="line">        board[startr][startc] = curr;<span class="comment">// Backtracking is 1) Choose 2) Explore 3) Unchoose</span></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="70-climbing-stairs"><a href="#70-climbing-stairs" class="headerlink" title="70 climbing stairs"></a><a href="https://leetcode.com/problems/climbing-stairs/" target="_blank" rel="noopener">70 climbing stairs</a></h3><p><code>dynamic programing</code></p>
+<h4 id="java-recursion"><a href="#java-recursion" class="headerlink" title="java recursion"></a><code>java</code> recursion</h4><p>Fibonacci:$Fib(n) = Fib(n-1)+Fib(n-2)$</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">climbStairs</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//int res = 0;</span></span><br><span class="line">        <span class="keyword">int</span> res[] = <span class="keyword">new</span> <span class="keyword">int</span>[n+<span class="number">1</span>];</span><br><span class="line">        <span class="comment">//res = climbStairs(0, n, res);</span></span><br><span class="line">        <span class="keyword">return</span> climbStairs(<span class="number">0</span>, n, res);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">climbStairs</span><span class="params">(<span class="keyword">int</span> curr, <span class="keyword">int</span> n, <span class="keyword">int</span> res[])</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(curr == n)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(curr &gt; n) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//replace the &lt;=2 loop</span></span><br><span class="line">        <span class="keyword">if</span>(res[curr]&gt;<span class="number">0</span>) <span class="keyword">return</span> res[curr];</span><br><span class="line">        res[curr] = climbStairs(curr+<span class="number">1</span>, n, res) + climbStairs(curr+<span class="number">2</span>, n, res);</span><br><span class="line">        <span class="keyword">return</span> res[curr];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Time Complexity $O(n)$ Size of recursion tree can go up to <em>n</em>.</p>
+<p>As we can see this problem can be broken into subproblems, and it contains the optimal substructure property i.e. its optimal solution can be constructed efficiently from optimal solutions of its subproblems, we can use dynamic programming to solve this problem.</p>
+<p>One can reach $i^{th}$ step in one of the two ways:</p>
+<ol>
+<li>Taking a single step from $(i-1)^{th}$ step.</li>
+<li>Taking a step of 2 from $(i-2)^{th}$ step.</li>
+</ol>
+<p>So, the total number of ways to reach$i^{th}$ is equal to sum of ways of reaching $(i-1)^{th} $step and ways of reaching $(i-2)^{th}$step.</p>
+<h4 id="c-dynamic-programming"><a href="#c-dynamic-programming" class="headerlink" title="c++ dynamic programming"></a><code>c++</code> dynamic programming</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">climbStairs</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(n==<span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> dp[n+<span class="number">1</span>];</span><br><span class="line">        dp[<span class="number">0</span>] = dp[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>; i&lt;=n; i++)&#123;</span><br><span class="line">            dp[i] = dp[i<span class="number">-1</span>] + dp[i<span class="number">-2</span>];</span><br><span class="line">        &#125;      </span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
+          
+            <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+          
+            <a href="/tags/Dynamic-Programming/" rel="tag"><i class="fa fa-tag"></i> Dynamic Programming</a>
+          
+            <a href="/tags/Recursion/" rel="tag"><i class="fa fa-tag"></i> Recursion</a>
+          
+            <a href="/tags/DFS/" rel="tag"><i class="fa fa-tag"></i> DFS</a>
+          
+            <a href="/tags/BFS/" rel="tag"><i class="fa fa-tag"></i> BFS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/25/Array/" rel="next" title="Array Algorithms in LeetCode">
+                <i class="fa fa-chevron-left"></i> Array Algorithms in LeetCode
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/05/Dynamic-Programming/" rel="prev" title="Dynamic Programming in LeetCode">
+                Dynamic Programming in LeetCode <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+    <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Shiyu Wang">
+  
+  <p class="site-author-name" itemprop="name">Shiyu Wang</p>
+  <div class="site-description motion-element" itemprop="description">Life is short, you need Python</div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span>
+        </a>
+      </div>
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+  <div class="links-of-author motion-element">
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/Wang-Shiyu" title="GitHub &rarr; https://github.com/Wang-Shiyu" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:sw71@rice.edu" title="E-Mail &rarr; mailto:sw71@rice.edu" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+
+
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#BackTracking-and-Recursion"><span class="nav-number">1.</span> <span class="nav-text">BackTracking and Recursion</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#17-Letter-Combinations-of-a-Phone-Number"><span class="nav-number">1.1.</span> <span class="nav-text">17 Letter Combinations of a Phone Number</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22-Generate-Parentheses"><span class="nav-number">1.2.</span> <span class="nav-text">22 Generate Parentheses</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#c-recursion"><span class="nav-number">1.2.1.</span> <span class="nav-text">c++ recursion</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#39-Combination-Sum"><span class="nav-number">1.3.</span> <span class="nav-text">39 Combination Sum</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#c-backtracking"><span class="nav-number">1.3.1.</span> <span class="nav-text">c++ backtracking</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#40-Combination-Sum-ii"><span class="nav-number">1.4.</span> <span class="nav-text">40 Combination Sum ii</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#c-recursion-1"><span class="nav-number">1.4.1.</span> <span class="nav-text">c++ recursion</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#46-permutation"><span class="nav-number">1.5.</span> <span class="nav-text">46 permutation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#java-backtrack"><span class="nav-number">1.5.1.</span> <span class="nav-text">java backtrack</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#47-Permutations-II"><span class="nav-number">1.6.</span> <span class="nav-text">47 Permutations II</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#java-recursion-dfs"><span class="nav-number">1.6.1.</span> <span class="nav-text">java recursion / dfs</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#55-jump-game"><span class="nav-number">1.7.</span> <span class="nav-text">55 jump-game</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#c-recursion-time-limit-exceeded"><span class="nav-number">1.7.1.</span> <span class="nav-text">c++ recursion time limit exceeded</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#60-Permutation-Sequence"><span class="nav-number">1.8.</span> <span class="nav-text">60 Permutation Sequence</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#78-subsets"><span class="nav-number">1.9.</span> <span class="nav-text">78 subsets</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#c-recursion-2"><span class="nav-number">1.9.1.</span> <span class="nav-text">c++ recursion</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#90-subset-II"><span class="nav-number">1.10.</span> <span class="nav-text">90 subset II</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#c-using-previous-subset-counting-the-duplicates"><span class="nav-number">1.10.1.</span> <span class="nav-text">c++using previous subset, counting the duplicates</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#79-word-search"><span class="nav-number">1.11.</span> <span class="nav-text">79 word search</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#c-backtracking-and-recursion-DFS"><span class="nav-number">1.11.1.</span> <span class="nav-text">c++ backtracking and recursion | DFS</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#70-climbing-stairs"><span class="nav-number">1.12.</span> <span class="nav-text">70 climbing stairs</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#java-recursion"><span class="nav-number">1.12.1.</span> <span class="nav-text">java recursion</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-dynamic-programming"><span class="nav-number">1.12.2.</span> <span class="nav-text">c++ dynamic programming</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Samuel Wong</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// GET RESPONSIVE HEIGHT PASSED FROM IFRAME
+
+window.addEventListener("message", function(e) {
+  var data = e.data;
+  if ((typeof data === 'string') && (data.indexOf('ciu_embed') > -1)) {
+    var featureID = data.split(':')[1];
+    var height = data.split(':')[2];
+    $(`iframe[data-feature=${featureID}]`).height(parseInt(height) + 30);
+  }
+}, false);
+</script>
+
+
+
+
+
+
+
+
+  
+
+</body>
+</html>

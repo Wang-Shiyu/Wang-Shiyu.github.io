@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="This is a notebook that recoding common used algorithms in array problems.">
+<meta name="keywords" content="C++,java,Array,Two pointers,Binary Search">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Array Algorithms in LeetCode">
+<meta property="og:url" content="http://SamuelWong.com/2019/08/25/Array/index.html">
+<meta property="og:site_name" content="Samuel Wong">
+<meta property="og:description" content="This is a notebook that recoding common used algorithms in array problems.">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-09-16T14:31:46.949Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Array Algorithms in LeetCode">
+<meta name="twitter:description" content="This is a notebook that recoding common used algorithms in array problems.">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://SamuelWong.com/2019/08/25/Array/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>Array Algorithms in LeetCode | Samuel Wong</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Samuel Wong</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Learning with me</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://SamuelWong.com/2019/08/25/Array/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shiyu Wang">
+      <meta itemprop="description" content="Life is short, you need Python">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Samuel Wong">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Array Algorithms in LeetCode
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-08-25 14:23:45" itemprop="dateCreated datePublished" datetime="2019-08-25T14:23:45-04:00">2019-08-25</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-09-16 10:31:46" itemprop="dateModified" datetime="2019-09-16T10:31:46-04:00">2019-09-16</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>This is a notebook that recoding common used algorithms in array problems.</p>
+ <a id="more"></a>
+
+<h2 id="Array-and-Two-pointers-and-Binary-Search"><a href="#Array-and-Two-pointers-and-Binary-Search" class="headerlink" title="Array and Two pointers and Binary Search"></a>Array and Two pointers and Binary Search</h2><h3 id="1-Two-Sum"><a href="#1-Two-Sum" class="headerlink" title="1.Two Sum"></a>1.<a href="https://leetcode.com/problems/two-sum/" target="_blank" rel="noopener">Two Sum</a></h3><p><code>Array</code>, <code>hash table</code></p>
+<h4 id="python3-dictionary"><a href="#python3-dictionary" class="headerlink" title="python3 dictionary"></a><code>python3</code> dictionary</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">twoSum</span><span class="params">(self, nums: List[int], target: int)</span> -&gt; List[int]:</span></span><br><span class="line">        mydict = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)):</span><br><span class="line">            complement = target - nums[i]</span><br><span class="line">            <span class="keyword">if</span> complement <span class="keyword">in</span> mydict:</span><br><span class="line">                <span class="keyword">return</span> [mydict[complement],i]</span><br><span class="line">            mydict[nums[i]] = i</span><br></pre></td></tr></table></figure>
+
+<h4 id="java-one-pass-hash-table"><a href="#java-one-pass-hash-table" class="headerlink" title="java one-pass hash table"></a><code>java</code> one-pass hash table</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] twoSum(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target) &#123;</span><br><span class="line">		Map&lt;Integer, Integer&gt; t = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;nums.length; i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> complement = target - nums[i];</span><br><span class="line">            <span class="keyword">if</span>(t.containsKey(complement))</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;t.get(complement),i&#125;;</span><br><span class="line">            t.put(nums[i],i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"No two sum solution"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Time complexity : $$O(n)$$</p>
+<p>Check whether the complement is in the map before put it in the map.</p>
+<h4 id="c-brute-force"><a href="#c-brute-force" class="headerlink" title="c++ brute force"></a><code>c++</code> brute force</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; twoSum(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        2+7 2+11 2+15</span></span><br><span class="line"><span class="comment">        7+11 7+15</span></span><br><span class="line"><span class="comment">        11+15</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;  res(<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;nums.size()<span class="number">-1</span>;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;nums.size();j++)</span><br><span class="line">                <span class="keyword">if</span>(nums[i]+nums[j]==target)&#123;</span><br><span class="line">                    res[<span class="number">0</span>]=i;</span><br><span class="line">                    res[<span class="number">1</span>]=j;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="11-Container-With-Most-Water"><a href="#11-Container-With-Most-Water" class="headerlink" title="11.Container With Most Water"></a>11.<a href="https://leetcode.com/problems/container-with-most-water/" target="_blank" rel="noopener">Container With Most Water</a></h3><p><code>Array</code>, <code>two pointers</code></p>
+<h4 id="java-two-pointers"><a href="#java-two-pointers" class="headerlink" title="java two pointers"></a><code>java</code> two pointers</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*	1,8,6,2,5,4,8,3,7</span></span><br><span class="line"><span class="comment">  	从左和右一起找</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxArea</span><span class="params">(<span class="keyword">int</span>[] height)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> end = height.length - <span class="number">1</span>;<span class="comment">//array长度，不同于str.length()</span></span><br><span class="line">        <span class="keyword">int</span> start = <span class="number">0</span>, maxarea = <span class="number">0</span>;</span><br><span class="line">       	<span class="keyword">while</span>(end - start != <span class="number">0</span>)&#123;</span><br><span class="line">            maxarea = Math.max(maxarea, Math.min(height[start],height[end])*(end-start));</span><br><span class="line">            <span class="keyword">if</span>(height[start]&lt;height[end])&#123;</span><br><span class="line">                start++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> end--;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxarea;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Time complexity : $$O(n)$$. Single pass.</p>
+<p>Space complexity : $$O(1)$$. Constant space is used.</p>
+<h3 id="15-3sum"><a href="#15-3sum" class="headerlink" title="15 3sum"></a>15 <a href="https://leetcode.com/problems/3sum/" target="_blank" rel="noopener">3sum</a></h3><p><code>two pointers</code>  <code>array</code></p>
+<h4 id="java-two-pointers-1"><a href="#java-two-pointers-1" class="headerlink" title="java two pointers"></a><code>java</code> two pointers</h4><p>if the sum of the current triplet &gt;0, then move the right pointer, else &lt; 0, move the left pointer</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; threeSum(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; res = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        <span class="comment">// nums = [-1, 0, 1, 2, -1, -4],</span></span><br><span class="line">        <span class="comment">// nums = [-4, -1, -1, 0, 1, 2]</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;nums.length-<span class="number">2</span>;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(i==<span class="number">0</span> || (i&gt;<span class="number">0</span> &amp;&amp; nums[i]!=nums[i-<span class="number">1</span>]))&#123;</span><br><span class="line">                <span class="keyword">int</span> start = i+<span class="number">1</span>, end = nums.length-<span class="number">1</span>, target=<span class="number">0</span>-nums[i];</span><br><span class="line">                <span class="keyword">while</span>(start&lt;end)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(nums[start] + nums[end] == target)&#123;</span><br><span class="line">                        res.add(Arrays.asList(nums[i], nums[start], nums[end]));</span><br><span class="line">                        <span class="keyword">while</span>(start&lt;end &amp;&amp; nums[start] == nums[start+<span class="number">1</span>]) start++;</span><br><span class="line">                        <span class="keyword">while</span>(start&lt;end &amp;&amp; nums[end] == nums[end-<span class="number">1</span>]) end--;</span><br><span class="line">                        start++; end--;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span> <span class="keyword">if</span>(nums[start]+nums[end] &lt; target) start++;</span><br><span class="line">                    <span class="keyword">else</span> end--;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Time complexity: $$O(n^2)$$</p>
+<h3 id="16-3Sum-Closest"><a href="#16-3Sum-Closest" class="headerlink" title="16 3Sum Closest"></a>16 <a href="https://leetcode.com/problems/3sum-closest/" target="_blank" rel="noopener">3Sum Closest</a></h3><h4 id="java-two-pointers-2"><a href="#java-two-pointers-2" class="headerlink" title="java two pointers"></a><code>java</code> two pointers</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">threeSumClosest</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        <span class="comment">// find closest in the start 0,1,2        </span></span><br><span class="line">        <span class="keyword">int</span> sum = (nums[<span class="number">0</span>]+nums[<span class="number">1</span>]+nums[<span class="number">2</span>]);</span><br><span class="line">        <span class="keyword">int</span> mmin = Math.abs(target - sum), res = sum;</span><br><span class="line">        <span class="comment">//0, -1, 2, 1, -4</span></span><br><span class="line">        <span class="comment">//-4, -1, 0, 1, 2</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;nums.length-<span class="number">2</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> start = i+<span class="number">1</span>, end = nums.length-<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span>(start &lt; end)&#123;</span><br><span class="line">                sum = nums[i]+nums[start]+nums[end];</span><br><span class="line">                <span class="keyword">if</span>(Math.abs(target - sum) &lt; mmin)&#123;</span><br><span class="line">                    res = sum;</span><br><span class="line">                    mmin = Math.abs(target - sum);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(sum &gt; target) end--;</span><br><span class="line">                <span class="keyword">else</span> start++;    </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Time complexity: $$ O(n^2) $$</p>
+<h4 id="javaexample"><a href="#javaexample" class="headerlink" title="javaexample"></a><code>java</code>example</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">threeSumClosest</span><span class="params">(<span class="keyword">int</span>[] num, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> result = num[<span class="number">0</span>] + num[<span class="number">1</span>] + num[num.length - <span class="number">1</span>];</span><br><span class="line">        Arrays.sort(num);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num.length - <span class="number">2</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> start = i + <span class="number">1</span>, end = num.length - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (start &lt; end) &#123;</span><br><span class="line">                <span class="keyword">int</span> sum = num[i] + num[start] + num[end];</span><br><span class="line">                <span class="keyword">if</span> (sum &gt; target) &#123;</span><br><span class="line">                    end--;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    start++;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (Math.abs(sum - target) &lt; Math.abs(result - target)) &#123;</span><br><span class="line">                    result = sum;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="18-4sum"><a href="#18-4sum" class="headerlink" title="18 4sum"></a>18 <a href="https://leetcode.com/problems/4sum/" target="_blank" rel="noopener">4sum</a></h3><p>Review of 2sum and 3sum using two pointers.</p>
+<p>2sum:</p>
+<p><strong>3sum:</strong></p>
+<ul>
+<li>Sort the input array</li>
+<li>Start from the smallest digit <code>i</code>, use two pointers to indicate the <code>i+1</code> digit and the last digit <code>n</code> respectively. Calculate the sum of array[i+1] and array[n].</li>
+<li>Check the sign of <code>sum</code>, &gt;0, then move the right pointer to left by one digit, else move the left pointer to right by one digit.  Find the <code>sum</code> that equals to (0 - array[i]) and record them.</li>
+<li>Repeat step 2 until two pointers meet. Avoid the duplicate digits by moving pointers. </li>
+</ul>
+<p>4 sum is primarily based on 3 sum and based on 2sum </p>
+<h4 id="javatwo-pointers"><a href="#javatwo-pointers" class="headerlink" title="javatwo pointers"></a><code>java</code>two pointers</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; fourSum(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; res = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        <span class="keyword">int</span> len = nums.length;</span><br><span class="line">        <span class="keyword">if</span> (nums==<span class="keyword">null</span> || len&lt;<span class="number">4</span>)</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> max = nums[len - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">if</span>(<span class="number">4</span>*nums[<span class="number">0</span>] &gt; target || <span class="number">4</span>*max &lt; target) </span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        <span class="keyword">int</span> curr, i;</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;len;i++)&#123;</span><br><span class="line">            curr = nums[i];</span><br><span class="line">            <span class="comment">//avoid dupicates</span></span><br><span class="line">            <span class="keyword">if</span>(i&gt;<span class="number">0</span> &amp;&amp; curr == nums[i-<span class="number">1</span>]) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span>(curr + <span class="number">3</span>*max &lt; target) <span class="keyword">continue</span>;<span class="comment">// curr too small, increase curr</span></span><br><span class="line">            <span class="keyword">if</span>(<span class="number">4</span>*curr &gt; target) <span class="keyword">break</span>;<span class="comment">//curr too large, jump out</span></span><br><span class="line">            <span class="keyword">if</span>(<span class="number">4</span>*curr == target)&#123; <span class="comment">//continuous curr, curr, curr, curr</span></span><br><span class="line">                <span class="keyword">if</span>(i+<span class="number">3</span>&lt;len &amp;&amp; nums[i+<span class="number">3</span>]==curr)</span><br><span class="line">                    res.add(Arrays.asList(curr,curr,curr,curr));</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            threeSum(nums, target-curr, i+<span class="number">1</span>, len-<span class="number">1</span>, res, curr);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * Find all possible distinguished three numbers adding up to the target</span></span><br><span class="line"><span class="comment">	 * in sorted array nums[] between indices low and high. If there are,</span></span><br><span class="line"><span class="comment">	 * add all of them into the ArrayList fourSumList, using</span></span><br><span class="line"><span class="comment">	 * fourSumList.add(Arrays.asList(z1, the three numbers))</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">threeSum</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target, <span class="keyword">int</span> first, <span class="keyword">int</span> last, List&lt;List&lt;Integer&gt;&gt; res, <span class="keyword">int</span> curr )</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(first+<span class="number">1</span> &gt;= last) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">int</span> max = nums[last];</span><br><span class="line">        <span class="keyword">if</span>(<span class="number">3</span>*nums[first] &gt; target || <span class="number">3</span>*max &lt; target) </span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">int</span> curr_3sum, i;</span><br><span class="line">        <span class="keyword">for</span>(i=first;i&lt;last-<span class="number">1</span>;i++)&#123;</span><br><span class="line">            curr_3sum = nums[i];</span><br><span class="line">            <span class="comment">//avoid dupicates</span></span><br><span class="line">            <span class="keyword">if</span>(i&gt;first &amp;&amp; curr_3sum == nums[i-<span class="number">1</span>]) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span>(curr_3sum + <span class="number">2</span>*max &lt; target) <span class="keyword">continue</span>;<span class="comment">// curr too small, increase curr</span></span><br><span class="line">            <span class="keyword">if</span>(<span class="number">3</span>*curr_3sum &gt; target) <span class="keyword">break</span>;<span class="comment">//curr too large, jump out</span></span><br><span class="line">            <span class="keyword">if</span>(<span class="number">3</span>*curr_3sum == target)&#123; <span class="comment">//continuous curr, curr, curr, curr</span></span><br><span class="line">                <span class="keyword">if</span>(i+<span class="number">1</span>&lt;last &amp;&amp; nums[i+<span class="number">2</span>]==curr_3sum)</span><br><span class="line">                    res.add(Arrays.asList(curr,curr_3sum,curr_3sum,curr_3sum));</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            twoSum(nums, target-curr_3sum, i+<span class="number">1</span>, last, res, curr, curr_3sum);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">twoSum</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target, <span class="keyword">int</span> first, <span class="keyword">int</span> last, List&lt;List&lt;Integer&gt;&gt; res, <span class="keyword">int</span> curr, <span class="keyword">int</span> curr_3sum )</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(first &gt;= last) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(<span class="number">2</span>*nums[first] &gt; target || <span class="number">2</span>*nums[last] &lt; target) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">int</span> i = first, j = last, sum, curr_2sum;</span><br><span class="line">        <span class="keyword">while</span>(i&lt;j)&#123;</span><br><span class="line">            sum = nums[i]+nums[j];</span><br><span class="line">            <span class="keyword">if</span>(sum == target)&#123;</span><br><span class="line">                res.add(Arrays.asList(curr,curr_3sum,nums[i],nums[j]));</span><br><span class="line">                <span class="keyword">while</span>(i&lt;j &amp;&amp; nums[i] == nums[i+<span class="number">1</span>]) i++;</span><br><span class="line">                <span class="keyword">while</span>(i&lt;j &amp;&amp; nums[j] == nums[j-<span class="number">1</span>]) j--;</span><br><span class="line">                i++;j--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(sum&lt;target) i++;</span><br><span class="line">            <span class="keyword">else</span> j--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="26-Remove-Duplicates-from-Sorted-Array"><a href="#26-Remove-Duplicates-from-Sorted-Array" class="headerlink" title="26 Remove Duplicates from Sorted Array"></a>26 <a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array/" target="_blank" rel="noopener">Remove Duplicates from Sorted Array</a></h3><h4 id="c-two-pointers"><a href="#c-two-pointers" class="headerlink" title="c++ two pointers"></a><code>c++</code> two pointers</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">//good example to learn reference</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">removeDuplicates</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> start = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> end=<span class="number">1</span>; end&lt;nums.size();end++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[end]!=nums[start]) <span class="comment">//find new number</span></span><br><span class="line">                nums[++start] = nums[end]; <span class="comment">//record</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//when to use two pointers?</span></span><br><span class="line">        <span class="comment">//one slow runner one fast runner</span></span><br><span class="line">        <span class="keyword">return</span> nums.size()==<span class="number">0</span>?<span class="number">0</span>:start+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="80-Remove-Duplicates-from-Sorted-Array-II"><a href="#80-Remove-Duplicates-from-Sorted-Array-II" class="headerlink" title="80 Remove Duplicates from Sorted Array II"></a>80 <a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/" target="_blank" rel="noopener">Remove Duplicates from Sorted Array II</a></h3><h4 id="c-two-pointers-1"><a href="#c-two-pointers-1" class="headerlink" title="c++ two pointers"></a><code>c++</code> two pointers</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">removeDuplicates</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> start = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> n : nums)&#123;</span><br><span class="line">            <span class="keyword">if</span>(start&lt;<span class="number">2</span> || n &gt; nums[start<span class="number">-2</span>])</span><br><span class="line">                nums[start++] = n;  </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//0 0 1 1 2 3 3 3 3</span></span><br><span class="line">        <span class="comment">//            s             </span></span><br><span class="line">        <span class="keyword">return</span> nums.size()==<span class="number">0</span> ? <span class="number">0</span> : start;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="27-Remove-Element"><a href="#27-Remove-Element" class="headerlink" title="27 Remove Element"></a>27 <a href="https://leetcode.com/problems/remove-element/" target="_blank" rel="noopener">Remove Element</a></h3><h4 id="c-two-pointers-2"><a href="#c-two-pointers-2" class="headerlink" title="c++two pointers"></a><code>c++</code>two pointers</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">removeElement</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//3,2,2,3 3  2,3,2,3 2,2,3,3</span></span><br><span class="line">        <span class="comment">//1 1</span></span><br><span class="line">        <span class="comment">//1,2 2</span></span><br><span class="line">        <span class="comment">//1,2,2,3 1 2,1,2,3 2,2,1,3 2,2,3,1</span></span><br><span class="line">        <span class="comment">//put all the number except val to the front</span></span><br><span class="line">        <span class="keyword">int</span> len = nums.size(), start = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> end=<span class="number">0</span>; end&lt;len; end++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[end]!=val)&#123;</span><br><span class="line">                nums[start] = nums[end];</span><br><span class="line">                start++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> start;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="28-Implement-strStr"><a href="#28-Implement-strStr" class="headerlink" title="28 Implement strStr()"></a>28 <a href="https://leetcode.com/problems/implement-strstr/" target="_blank" rel="noopener">Implement strStr()</a></h3><h4 id="c-two-pointers-3"><a href="#c-two-pointers-3" class="headerlink" title="c++ two pointers"></a><code>c++</code> two pointers</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">strStr</span><span class="params">(<span class="built_in">string</span> haystack, <span class="built_in">string</span> needle)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//two pointers</span></span><br><span class="line">        <span class="keyword">int</span> end = <span class="number">0</span>, res=<span class="number">-1</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> start=<span class="number">0</span>; start&lt;haystack.size(); start++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(haystack[start] == needle[end]) end++;</span><br><span class="line">            <span class="keyword">else</span>&#123;<span class="comment">//case when part match and entire mach overlap</span></span><br><span class="line">                <span class="comment">//"mississippi" "issipi"</span></span><br><span class="line">                <span class="comment">//"mississippi" "issip"</span></span><br><span class="line">                start -= end;</span><br><span class="line">                end = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(end==needle.size())&#123;</span><br><span class="line">                res = start - end + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(start==haystack.size()<span class="number">-1</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> needle.size()==<span class="number">0</span>?<span class="number">0</span>:res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="31next-permutation"><a href="#31next-permutation" class="headerlink" title="31next-permutation"></a>31<a href="https://leetcode.com/problems/next-permutation/" target="_blank" rel="noopener">next-permutation</a></h3><h4 id="c-two-pointers-4"><a href="#c-two-pointers-4" class="headerlink" title="c++ two pointers"></a><code>c++</code> two pointers</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">nextPermutation</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//decrement &gt; increment </span></span><br><span class="line">        <span class="comment">//in the lexicographically next greater permutation of numbers</span></span><br><span class="line">        <span class="comment">//6 5 4 8 7 5 1  find increment: 4 8</span></span><br><span class="line">        <span class="comment">//find the next number larger than 4</span></span><br><span class="line">        <span class="comment">//swap, 6 5 5 8 7 4 1, then change 8 7 4 1 to increment</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=nums.size()<span class="number">-1</span>; i&gt;<span class="number">0</span>;i--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i]&gt;nums[i<span class="number">-1</span>])&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j=nums.size()<span class="number">-1</span>; j&gt;i<span class="number">-1</span>; j--)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(nums[j]&gt;nums[i<span class="number">-1</span>])&#123;</span><br><span class="line">                        <span class="built_in">cout</span>&lt;&lt;i&lt;&lt;nums[j]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">                        <span class="keyword">int</span> tmp = nums[j];</span><br><span class="line">                        nums[j] = nums[i<span class="number">-1</span>];</span><br><span class="line">                        nums[i<span class="number">-1</span>] = tmp;</span><br><span class="line">                        sort(nums.begin()+i, nums.end());</span><br><span class="line">                        <span class="keyword">return</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(i==<span class="number">1</span>)&#123;</span><br><span class="line">                sort(nums.begin(),nums.end());</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="33-Search-in-Rotated-Sorted-Array"><a href="#33-Search-in-Rotated-Sorted-Array" class="headerlink" title="33 Search in Rotated Sorted Array"></a>33 <a href="https://leetcode.com/problems/search-in-rotated-sorted-array/" target="_blank" rel="noopener">Search in Rotated Sorted Array</a></h3><h4 id="c-Binary-Search"><a href="#c-Binary-Search" class="headerlink" title="c++Binary Search"></a><code>c++</code>Binary Search</h4><p>Let’s say <code>nums</code> looks like this: [12, 13, 14, 15, 16, 17, 18, 19, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]</p>
+<ul>
+<li><p>If target is let’s say 14, then we adjust <code>nums</code> to this, where “inf” means infinity:<br>[12, 13, 14, 15, 16, 17, 18, 19, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf]</p>
+</li>
+<li><p>If target is let’s say 7, then we adjust <code>nums</code> to this:<br>[-inf, -inf, -inf, -inf, -inf, -inf, -inf, -inf, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]</p>
+<p>move low = mid + 1And then we can simply do ordinary binary search.</p>
+<p>if nums[mid] and target are on the same side -&gt; easy life. If not, let’s move towards the target side. </p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">search</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.size()==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">int</span> lo = <span class="number">0</span>, hi = nums.size()<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">while</span>(lo&lt;hi)&#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (lo+hi)/<span class="number">2</span>;</span><br><span class="line">            <span class="comment">//if target and mid on the same side of nums[0]</span></span><br><span class="line">            <span class="keyword">if</span>(nums[mid]&lt;nums[<span class="number">0</span>] == target&lt;nums[<span class="number">0</span>])&#123;</span><br><span class="line">                <span class="keyword">if</span>(nums[mid] &lt; target) lo = mid+<span class="number">1</span>;</span><br><span class="line">                <span class="keyword">else</span> hi = mid;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(target&lt;nums[<span class="number">0</span>])&#123;</span><br><span class="line">                lo = mid+<span class="number">1</span>; <span class="comment">//target on the right side</span></span><br><span class="line">            &#125;<span class="keyword">else</span> </span><br><span class="line">                hi = mid; <span class="comment">//target on the left side         </span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(nums[lo]==target)</span><br><span class="line">            <span class="keyword">return</span> lo;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>二分法变量：lo, hi, mid target，判断mid与target大小改变lo与hi</p>
+<p>Time Complexity &lt; $$O(log_n)$$</p>
+<h3 id="81-Search-in-Rotated-Sorted-Array-II"><a href="#81-Search-in-Rotated-Sorted-Array-II" class="headerlink" title="81 Search in Rotated Sorted Array II"></a>81 <a href="https://leetcode.com/problems/search-in-rotated-sorted-array-ii/" target="_blank" rel="noopener">Search in Rotated Sorted Array II</a></h3><p>Difference: array contains duplicates, which will cause unordered sequences during binary search.</p>
+<p><a href="https://leetcode.com/problems/search-in-rotated-sorted-array-ii/discuss/177150/Search-in-Rotated-Sorted-Array-I-python-code" target="_blank" rel="noopener">https://leetcode.com/problems/search-in-rotated-sorted-array-ii/discuss/177150/Search-in-Rotated-Sorted-Array-I-python-code</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    bool search(vector&lt;int&gt;&amp; nums, int target) &#123;</span><br><span class="line">        if(nums.size()==0) return false;</span><br><span class="line">        int lo = 0, hi = nums.size()-1;</span><br><span class="line">        while(lo &lt;= hi)&#123;</span><br><span class="line">            //adjust, avoid dupicates</span><br><span class="line">            while(lo &lt; hi &amp;&amp; nums[lo]==nums[hi]) lo++;</span><br><span class="line">            int mid = lo + (hi-lo) / 2;</span><br><span class="line">            if(nums[mid] == target) return true;</span><br><span class="line">            else if(nums[mid] &lt;= nums[hi])&#123;//left side</span><br><span class="line">                if(nums[mid] &lt; target &amp;&amp; target&lt;=nums[hi]) lo = mid + 1;</span><br><span class="line">                else hi = mid - 1;//need - 1</span><br><span class="line">            &#125;</span><br><span class="line">            else if(nums[mid]&gt;=nums[lo])&#123;</span><br><span class="line">                if(nums[mid] &gt; target &amp;&amp; target&gt;=nums[lo] ) hi = mid - 1; // target on thr right side</span><br><span class="line">                else lo = mid + 1; </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="34-Find-First-and-Last-Position-of-Element-in-Sorted-Array"><a href="#34-Find-First-and-Last-Position-of-Element-in-Sorted-Array" class="headerlink" title="34. Find First and Last Position of Element in Sorted Array"></a>34. <a href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/" target="_blank" rel="noopener">Find First and Last Position of Element in Sorted Array</a></h3><h4 id="c-two-binary-search-time-exceed-java🆗"><a href="#c-two-binary-search-time-exceed-java🆗" class="headerlink" title="c++ two binary search time exceed java🆗"></a><code>c++</code> two binary search time exceed <code>java</code>🆗</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; searchRange(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res(<span class="number">2</span>,<span class="number">-1</span>);<span class="comment">//2--size -1--int</span></span><br><span class="line">        <span class="keyword">int</span> leftInd = findtwosides(nums, target, <span class="literal">true</span>);</span><br><span class="line">        res[<span class="number">0</span>] = leftInd;</span><br><span class="line">        <span class="keyword">int</span> rightInd = findtwosides(nums, target, <span class="literal">false</span>);</span><br><span class="line">        res[<span class="number">1</span>] = rightInd;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findtwosides</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target, <span class="keyword">bool</span> left)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> lo = <span class="number">0</span>, hi = nums.size()<span class="number">-1</span>;</span><br><span class="line">        <span class="comment">//[1,4,4,4,5,9]</span></span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">        <span class="keyword">while</span>(lo&lt;hi)&#123;</span><br><span class="line">            <span class="comment">//int mid = (lo+hi)/2; overflow</span></span><br><span class="line">            <span class="keyword">int</span> mid = lo + (hi-lo)/<span class="number">2</span>;<span class="comment">//cost less time</span></span><br><span class="line">            <span class="keyword">if</span>(nums[mid] &lt; target) lo = mid+<span class="number">1</span>;</span><br><span class="line">            <span class="comment">//found -&gt; not found , keep moving to right</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(nums[mid] &gt; target || (left &amp;&amp; nums[mid]==target)) hi = mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> lo;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="35-Search-Insert-Position"><a href="#35-Search-Insert-Position" class="headerlink" title="35 Search Insert Position"></a>35 <a href="https://leetcode.com/problems/search-insert-position/" target="_blank" rel="noopener">Search Insert Position</a></h3><h4 id="c-binary-search"><a href="#c-binary-search" class="headerlink" title="c++binary search"></a><code>c++</code>binary search</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">searchInsert</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> lo = <span class="number">0</span>, hi = nums.size()<span class="number">-1</span> ;<span class="comment">//need -1</span></span><br><span class="line">        <span class="keyword">while</span>(lo &lt; hi)&#123;</span><br><span class="line">            <span class="keyword">int</span> mid = lo + (hi-lo)/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(nums[mid] &gt;= target) hi = mid;<span class="comment">//need =</span></span><br><span class="line">            <span class="keyword">else</span> lo = mid+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//1 3 5 6 , 7</span></span><br><span class="line">        <span class="comment">//0 3 /2 = 1</span></span><br><span class="line">        <span class="comment">// 2 + 3 /2 = 2</span></span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">        <span class="keyword">return</span> nums[lo]&lt;target &amp;&amp; lo==nums.size()<span class="number">-1</span> ? lo+<span class="number">1</span>:lo;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="48-Rotate-Image"><a href="#48-Rotate-Image" class="headerlink" title="48 Rotate Image"></a>48 Rotate Image</h3><h4 id="c-clockwise-rotate"><a href="#c-clockwise-rotate" class="headerlink" title="c++ clockwise rotate"></a><code>c++</code> clockwise rotate</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * clockwise rotate</span></span><br><span class="line"><span class="comment">     * first reverse up to down, then swap the symmetry </span></span><br><span class="line"><span class="comment">     * 1 2 3     7 8 9     7 4 1</span></span><br><span class="line"><span class="comment">     * 4 5 6  =&gt; 4 5 6  =&gt; 8 5 2 </span></span><br><span class="line"><span class="comment">     * 7 8 9     1 2 3     9 6 3</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; matrix)</span> </span>&#123;</span><br><span class="line">        reverse(matrix.begin(), matrix.end());</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;matrix.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>; j&lt;matrix[i].size(); j++)&#123;</span><br><span class="line">                swap(matrix[i][j], matrix[j][i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="53-Maximum-Subarray"><a href="#53-Maximum-Subarray" class="headerlink" title="53 Maximum Subarray"></a>53 <a href="https://leetcode.com/problems/maximum-subarray/" target="_blank" rel="noopener">Maximum Subarray</a></h3><p><code>dynamic programming</code></p>
+<h4 id="c-dynamic-programming"><a href="#c-dynamic-programming" class="headerlink" title="c++ dynamic programming"></a><code>c++</code> dynamic programming</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxSubArray</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">/*DP:</span></span><br><span class="line"><span class="comment">        divide the main problem to sub problems</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        <span class="keyword">int</span> dp[nums.size()];</span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span> sum = nums[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;nums.size(); i++)&#123;</span><br><span class="line">            dp[i] = nums[i] + (dp[i<span class="number">-1</span>]&gt;<span class="number">0</span> ? dp[i<span class="number">-1</span>]:<span class="number">0</span>);</span><br><span class="line">            sum = max(sum, dp[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="54-spiral-matrix"><a href="#54-spiral-matrix" class="headerlink" title="54 spiral-matrix"></a>54 <a href="https://leetcode.com/problems/spiral-matrix/" target="_blank" rel="noopener">spiral-matrix</a></h3><h4 id="c"><a href="#c" class="headerlink" title="c++"></a><code>c++</code></h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; spiralOrder(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; matrix) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">        <span class="keyword">if</span>(matrix.size()==<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> rowstart = <span class="number">0</span>, rowend = matrix.size()<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">int</span> colstart = <span class="number">0</span>, colend = matrix[<span class="number">0</span>].size()<span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">            </span><br><span class="line">        <span class="keyword">while</span>(colstart&lt;=colend &amp;&amp; rowstart&lt;=rowend)&#123;</span><br><span class="line">            <span class="comment">//go right</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=colstart; i&lt;=colend;i++)&#123;</span><br><span class="line">                res.push_back(matrix[rowstart][i]);</span><br><span class="line">            &#125;</span><br><span class="line">            rowstart++;</span><br><span class="line">            <span class="comment">//go down</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=rowstart; i&lt;=rowend; i++)&#123;</span><br><span class="line">                res.push_back(matrix[i][colend]);</span><br><span class="line">            &#125;</span><br><span class="line">            colend--;</span><br><span class="line">            <span class="comment">//go left</span></span><br><span class="line">            <span class="keyword">if</span>(rowstart&lt;=rowend)&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i=colend; i&gt;=colstart; i--)&#123;</span><br><span class="line">                    res.push_back(matrix[rowend][i]);    </span><br><span class="line">                &#125; </span><br><span class="line">            &#125;</span><br><span class="line">            rowend--;</span><br><span class="line">            <span class="comment">//go up</span></span><br><span class="line">            <span class="keyword">if</span>(colstart&lt;=colend)&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i=rowend; i&gt;=rowstart; i--)&#123;</span><br><span class="line">                    res.push_back(matrix[i][colstart]);</span><br><span class="line">                &#125;    </span><br><span class="line">            &#125;</span><br><span class="line">            colstart++;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="55-jump-game"><a href="#55-jump-game" class="headerlink" title="55 jump-game"></a>55 <a href="https://leetcode.com/problems/jump-game" target="_blank" rel="noopener">jump-game</a></h3><p><code>dynamic programming</code> <code>recursion</code></p>
+<h4 id="java-O-n-O-1"><a href="#java-O-n-O-1" class="headerlink" title="java O(n) O(1)"></a><code>java</code> O(n) O(1)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">canJump</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//no need to scan the rest when we know we can reach the end</span></span><br><span class="line">        <span class="keyword">int</span> remain = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;=remain; i++)&#123;</span><br><span class="line">            remain = Math.max(remain, nums[i]+i);</span><br><span class="line">            <span class="keyword">if</span>(remain &gt;= nums.length-<span class="number">1</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="56-Merge-Intervals"><a href="#56-Merge-Intervals" class="headerlink" title="56 Merge Intervals"></a>56 <a href="https://leetcode.com/problems/merge-intervals/discuss/21222/A-simple-Java-solution" target="_blank" rel="noopener">Merge Intervals</a></h3><p>The idea is to sort the intervals by their starting points. Then, we take the first interval and compare its end with the next intervals starts. As long as they overlap, we update the end to be the max end of the overlapping intervals. Once we find a non overlapping interval, we can add the previous “extended” interval and start over.</p>
+<h4 id="c-auto-and-sort"><a href="#c-auto-and-sort" class="headerlink" title="c++ auto and sort"></a><code>c++</code> auto and sort</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; merge(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; intervals) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;</span><br><span class="line">        <span class="keyword">if</span>(intervals.size()&lt;=<span class="number">1</span>) <span class="keyword">return</span> intervals;</span><br><span class="line">        sort(intervals.begin(), intervals.end(),</span><br><span class="line">             [](<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; i1, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; i2) &#123; </span><br><span class="line">                <span class="keyword">return</span> (i1[<span class="number">0</span>] &lt; i2[<span class="number">0</span>]);&#125;);</span><br><span class="line">        <span class="keyword">auto</span> previnterval = intervals[<span class="number">0</span>];</span><br><span class="line">        res.push_back(previnterval);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> interval : intervals)&#123;</span><br><span class="line">            <span class="keyword">if</span>(interval[<span class="number">0</span>]&lt;=previnterval[<span class="number">1</span>])&#123;</span><br><span class="line">                previnterval[<span class="number">1</span>] = max(previnterval[<span class="number">1</span>], interval[<span class="number">1</span>]);</span><br><span class="line">                res.pop_back();</span><br><span class="line">                res.push_back(previnterval);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                res.push_back(interval);</span><br><span class="line">                previnterval = interval;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>Sorting takes O(n log(n)) and merging the intervals takes O(n). So, the resulting algorithm takes O(n log(n)).</p>
+<h3 id="59-Spiral-Matrix-II"><a href="#59-Spiral-Matrix-II" class="headerlink" title="59 Spiral Matrix II"></a>59 <a href="https://leetcode.com/problems/spiral-matrix-ii/" target="_blank" rel="noopener">Spiral Matrix II</a></h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; generateMatrix(<span class="keyword">int</span> n) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res(n,<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(n,<span class="number">0</span>));</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">0</span>) <span class="keyword">return</span> res;</span><br><span class="line">        <span class="keyword">int</span> rowstart = <span class="number">0</span>, rowend = n<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">int</span> colstart = <span class="number">0</span>, colend = n<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(count&lt;=n*n &amp;&amp; colstart&lt;=colend &amp;&amp; rowstart&lt;=rowend)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=colstart; i&lt;=colend; i++)&#123;</span><br><span class="line">                res[rowstart][i] = count;</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">            rowstart++;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=rowstart; i&lt;=rowend; i++)&#123;</span><br><span class="line">                res[i][colend] = count;</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">            colend--;</span><br><span class="line">            <span class="keyword">if</span>(colend&gt;=colstart)&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i=colend; i&gt;=colstart; i--)&#123;</span><br><span class="line">                    res[rowend][i] = count;</span><br><span class="line">                    count++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            rowend--;</span><br><span class="line">            <span class="keyword">if</span>(rowend&gt;=rowstart)&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i=rowend; i&gt;=rowstart; i--)&#123;</span><br><span class="line">                    res[i][colstart] = count;</span><br><span class="line">                    count++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            colstart++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="66-plus-one"><a href="#66-plus-one" class="headerlink" title="66 plus one"></a>66 <a href="https://leetcode.com/problems/plus-one/" target="_blank" rel="noopener">plus one</a></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] plusOne(<span class="keyword">int</span>[] digits) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=digits.length-<span class="number">1</span>; i&gt;=<span class="number">0</span>; i--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(digits[i]&lt;<span class="number">9</span>)&#123;</span><br><span class="line">                digits[i]++;</span><br><span class="line">                <span class="keyword">return</span> digits;</span><br><span class="line">            &#125;</span><br><span class="line">            digits[i] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span>[] newdigits = <span class="keyword">new</span> <span class="keyword">int</span>[digits.length+<span class="number">1</span>];</span><br><span class="line">        newdigits[<span class="number">0</span>]++;</span><br><span class="line">        <span class="keyword">return</span> newdigits;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="73-set-matrix-zeros"><a href="#73-set-matrix-zeros" class="headerlink" title="73 set matrix zeros"></a>73 <a href="https://leetcode.com/problems/set-matrix-zeroes/" target="_blank" rel="noopener">set matrix zeros</a></h3><p>store states of each row in the first of that row, and store states of each column in the first of that column. Because the state of row0 and the state of column0 would occupy the same cell, I let it be the state of row0, and use another variable “col0” for column0. In the first phase, use matrix elements to set states in a top-down way. In the second phase, use states to set matrix elements in a bottom-up way.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setZeroes</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; matrix)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> col0 = <span class="number">1</span>, rows = matrix.size(), cols = matrix[<span class="number">0</span>].size();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;rows; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(matrix[i][<span class="number">0</span>]==<span class="number">0</span>) col0 = <span class="number">0</span>;<span class="comment">//</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>; j&lt;cols; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(matrix[i][j]==<span class="number">0</span>) matrix[i][<span class="number">0</span>] = matrix[<span class="number">0</span>][j] = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// traverse back, use flag to set zeros</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = rows - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = cols - <span class="number">1</span>; j &gt;= <span class="number">1</span>; j--)</span><br><span class="line">                <span class="keyword">if</span> (matrix[i][<span class="number">0</span>] == <span class="number">0</span> || matrix[<span class="number">0</span>][j] == <span class="number">0</span>)</span><br><span class="line">                    matrix[i][j] = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span> (col0 == <span class="number">0</span>) matrix[i][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="74-Search-a-2D-Matrix"><a href="#74-Search-a-2D-Matrix" class="headerlink" title="74. Search a 2D Matrix"></a>74. <a href="https://leetcode.com/problems/search-a-2d-matrix/" target="_blank" rel="noopener">Search a 2D Matrix</a></h3><h4 id="java-binary-tree"><a href="#java-binary-tree" class="headerlink" title="java binary tree"></a><code>java</code> binary tree</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">searchMatrix</span><span class="params">(<span class="keyword">int</span>[][] matrix, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(matrix.length==<span class="number">0</span>||matrix[<span class="number">0</span>].length==<span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">int</span> rows = matrix.length, cols = matrix[<span class="number">0</span>].length, row=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;rows; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(target &gt;= matrix[i][<span class="number">0</span>])</span><br><span class="line">                row = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> lo = <span class="number">0</span>, hi = cols-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(lo&lt;hi)&#123;</span><br><span class="line">            <span class="keyword">int</span> mid = lo + (hi - lo)/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(matrix[row][mid]&lt;target) lo = mid+<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> hi = mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> matrix[row][lo]==target? <span class="keyword">true</span>:<span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="75-Sort-Colors"><a href="#75-Sort-Colors" class="headerlink" title="75. Sort Colors"></a>75. <a href="https://leetcode.com/problems/sort-colors/" target="_blank" rel="noopener">Sort Colors</a></h3><h4 id="c-two-pointers-5"><a href="#c-two-pointers-5" class="headerlink" title="c++ two pointers"></a><code>c++</code> two pointers</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">sortColors</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> low = <span class="number">0</span>; </span><br><span class="line">       <span class="keyword">int</span> high = nums.size()<span class="number">-1</span>;</span><br><span class="line">       <span class="keyword">for</span>(<span class="keyword">int</span> i = low; i&lt;=high;) &#123;</span><br><span class="line">           <span class="keyword">if</span>(nums[i]==<span class="number">0</span>)</span><br><span class="line">              swap(nums[i++], nums[low++]);</span><br><span class="line">           <span class="keyword">else</span> <span class="keyword">if</span>(nums[i]==<span class="number">2</span>)</span><br><span class="line">              swap(nums[i], nums[high--]);</span><br><span class="line">           <span class="keyword">else</span> i++;</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-median-of-two-sorted-arrays"><a href="#4-median-of-two-sorted-arrays" class="headerlink" title="4 median of two sorted arrays"></a>4 <a href="https://leetcode.com/problems/median-of-two-sorted-arrays/solution/" target="_blank" rel="noopener">median of two sorted arrays</a></h3><h4 id="c-binary-search-1"><a href="#c-binary-search-1" class="headerlink" title="c++ binary search"></a><code>c++</code> binary search</h4><p><a href="https://www.youtube.com/watch?v=LPFhl65R7ww&amp;t=1013s" target="_blank" rel="noopener">https://www.youtube.com/watch?v=LPFhl65R7ww&amp;t=1013s</a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">findMedianSortedArrays</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums1.size()&gt;nums2.size()) <span class="keyword">return</span> findMedianSortedArrays(nums2, nums1);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> x = nums1.size(), y = nums2.size();</span><br><span class="line">        <span class="keyword">int</span> start = <span class="number">0</span>, end = x;</span><br><span class="line">        <span class="keyword">while</span>(start &lt;= end)&#123;</span><br><span class="line">            <span class="keyword">int</span> partitionx = start + (end-start) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">int</span> partitiony = (x+y+<span class="number">1</span>)/<span class="number">2</span> - partitionx;</span><br><span class="line">            <span class="keyword">int</span> maxleftx = partitionx == <span class="number">0</span> ? INT_MIN : nums1[partitionx<span class="number">-1</span>];</span><br><span class="line">            <span class="keyword">int</span> minrightx = partitionx == x ? INT_MAX : nums1[partitionx];</span><br><span class="line">            <span class="keyword">int</span> maxlefty = partitiony == <span class="number">0</span> ? INT_MIN : nums2[partitiony<span class="number">-1</span>];</span><br><span class="line">            <span class="keyword">int</span> minrighty = partitiony == y ? INT_MAX : nums2[partitiony];</span><br><span class="line">            <span class="keyword">if</span>(maxleftx&lt;=minrighty &amp;&amp; maxlefty&lt;=minrightx)&#123;</span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;maxlefty&lt;&lt;minrightx&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">                <span class="keyword">if</span>((x+y)%<span class="number">2</span> == <span class="number">0</span>)&#123;</span><br><span class="line">                    <span class="keyword">return</span> ((<span class="keyword">double</span>)(max(maxleftx, maxlefty) + min(minrighty, minrightx)) / <span class="number">2</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">return</span> (<span class="keyword">double</span>)max(maxleftx, maxlefty);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(maxleftx&gt;minrighty) <span class="comment">//too far on the right side of partition x</span></span><br><span class="line">                end = partitionx - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(maxlefty&gt;minrightx) <span class="comment">//too far on the left side of partition x</span></span><br><span class="line">                start = partitionx + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0.0</span>;<span class="comment">//throw exception</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
+          
+            <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+          
+            <a href="/tags/Array/" rel="tag"><i class="fa fa-tag"></i> Array</a>
+          
+            <a href="/tags/Two-pointers/" rel="tag"><i class="fa fa-tag"></i> Two pointers</a>
+          
+            <a href="/tags/Binary-Search/" rel="tag"><i class="fa fa-tag"></i> Binary Search</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/25/Linked-List/" rel="next" title="Linked List in LeetCode">
+                <i class="fa fa-chevron-left"></i> Linked List in LeetCode
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/27/BackTracking-and-Recursion/" rel="prev" title="BackTracking and Recursion in LeetCode">
+                BackTracking and Recursion in LeetCode <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+    <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Shiyu Wang">
+  
+  <p class="site-author-name" itemprop="name">Shiyu Wang</p>
+  <div class="site-description motion-element" itemprop="description">Life is short, you need Python</div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span>
+        </a>
+      </div>
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+  <div class="links-of-author motion-element">
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/Wang-Shiyu" title="GitHub &rarr; https://github.com/Wang-Shiyu" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:sw71@rice.edu" title="E-Mail &rarr; mailto:sw71@rice.edu" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+
+
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Array-and-Two-pointers-and-Binary-Search"><span class="nav-number">1.</span> <span class="nav-text">Array and Two pointers and Binary Search</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Two-Sum"><span class="nav-number">1.1.</span> <span class="nav-text">1.Two Sum</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#python3-dictionary"><span class="nav-number">1.1.1.</span> <span class="nav-text">python3 dictionary</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#java-one-pass-hash-table"><span class="nav-number">1.1.2.</span> <span class="nav-text">java one-pass hash table</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-brute-force"><span class="nav-number">1.1.3.</span> <span class="nav-text">c++ brute force</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-Container-With-Most-Water"><span class="nav-number">1.2.</span> <span class="nav-text">11.Container With Most Water</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#java-two-pointers"><span class="nav-number">1.2.1.</span> <span class="nav-text">java two pointers</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-3sum"><span class="nav-number">1.3.</span> <span class="nav-text">15 3sum</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#java-two-pointers-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">java two pointers</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-3Sum-Closest"><span class="nav-number">1.4.</span> <span class="nav-text">16 3Sum Closest</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#java-two-pointers-2"><span class="nav-number">1.4.1.</span> <span class="nav-text">java two pointers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#javaexample"><span class="nav-number">1.4.2.</span> <span class="nav-text">javaexample</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-4sum"><span class="nav-number">1.5.</span> <span class="nav-text">18 4sum</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#javatwo-pointers"><span class="nav-number">1.5.1.</span> <span class="nav-text">javatwo pointers</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#26-Remove-Duplicates-from-Sorted-Array"><span class="nav-number">1.6.</span> <span class="nav-text">26 Remove Duplicates from Sorted Array</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#c-two-pointers"><span class="nav-number">1.6.1.</span> <span class="nav-text">c++ two pointers</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#80-Remove-Duplicates-from-Sorted-Array-II"><span class="nav-number">1.7.</span> <span class="nav-text">80 Remove Duplicates from Sorted Array II</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#c-two-pointers-1"><span class="nav-number">1.7.1.</span> <span class="nav-text">c++ two pointers</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#27-Remove-Element"><span class="nav-number">1.8.</span> <span class="nav-text">27 Remove Element</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#c-two-pointers-2"><span class="nav-number">1.8.1.</span> <span class="nav-text">c++two pointers</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#28-Implement-strStr"><span class="nav-number">1.9.</span> <span class="nav-text">28 Implement strStr()</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#c-two-pointers-3"><span class="nav-number">1.9.1.</span> <span class="nav-text">c++ two pointers</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#31next-permutation"><span class="nav-number">1.10.</span> <span class="nav-text">31next-permutation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#c-two-pointers-4"><span class="nav-number">1.10.1.</span> <span class="nav-text">c++ two pointers</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#33-Search-in-Rotated-Sorted-Array"><span class="nav-number">1.11.</span> <span class="nav-text">33 Search in Rotated Sorted Array</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#c-Binary-Search"><span class="nav-number">1.11.1.</span> <span class="nav-text">c++Binary Search</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#81-Search-in-Rotated-Sorted-Array-II"><span class="nav-number">1.12.</span> <span class="nav-text">81 Search in Rotated Sorted Array II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#34-Find-First-and-Last-Position-of-Element-in-Sorted-Array"><span class="nav-number">1.13.</span> <span class="nav-text">34. Find First and Last Position of Element in Sorted Array</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#c-two-binary-search-time-exceed-java🆗"><span class="nav-number">1.13.1.</span> <span class="nav-text">c++ two binary search time exceed java🆗</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#35-Search-Insert-Position"><span class="nav-number">1.14.</span> <span class="nav-text">35 Search Insert Position</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#c-binary-search"><span class="nav-number">1.14.1.</span> <span class="nav-text">c++binary search</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#48-Rotate-Image"><span class="nav-number">1.15.</span> <span class="nav-text">48 Rotate Image</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#c-clockwise-rotate"><span class="nav-number">1.15.1.</span> <span class="nav-text">c++ clockwise rotate</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#53-Maximum-Subarray"><span class="nav-number">1.16.</span> <span class="nav-text">53 Maximum Subarray</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#c-dynamic-programming"><span class="nav-number">1.16.1.</span> <span class="nav-text">c++ dynamic programming</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#54-spiral-matrix"><span class="nav-number">1.17.</span> <span class="nav-text">54 spiral-matrix</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#c"><span class="nav-number">1.17.1.</span> <span class="nav-text">c++</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#55-jump-game"><span class="nav-number">1.18.</span> <span class="nav-text">55 jump-game</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#java-O-n-O-1"><span class="nav-number">1.18.1.</span> <span class="nav-text">java O(n) O(1)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#56-Merge-Intervals"><span class="nav-number">1.19.</span> <span class="nav-text">56 Merge Intervals</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#c-auto-and-sort"><span class="nav-number">1.19.1.</span> <span class="nav-text">c++ auto and sort</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#59-Spiral-Matrix-II"><span class="nav-number">1.20.</span> <span class="nav-text">59 Spiral Matrix II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#66-plus-one"><span class="nav-number">1.21.</span> <span class="nav-text">66 plus one</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#73-set-matrix-zeros"><span class="nav-number">1.22.</span> <span class="nav-text">73 set matrix zeros</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#74-Search-a-2D-Matrix"><span class="nav-number">1.23.</span> <span class="nav-text">74. Search a 2D Matrix</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#java-binary-tree"><span class="nav-number">1.23.1.</span> <span class="nav-text">java binary tree</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#75-Sort-Colors"><span class="nav-number">1.24.</span> <span class="nav-text">75. Sort Colors</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#c-two-pointers-5"><span class="nav-number">1.24.1.</span> <span class="nav-text">c++ two pointers</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-median-of-two-sorted-arrays"><span class="nav-number">1.25.</span> <span class="nav-text">4 median of two sorted arrays</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#c-binary-search-1"><span class="nav-number">1.25.1.</span> <span class="nav-text">c++ binary search</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Samuel Wong</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// GET RESPONSIVE HEIGHT PASSED FROM IFRAME
+
+window.addEventListener("message", function(e) {
+  var data = e.data;
+  if ((typeof data === 'string') && (data.indexOf('ciu_embed') > -1)) {
+    var featureID = data.split(':')[1];
+    var height = data.split(':')[2];
+    $(`iframe[data-feature=${featureID}]`).height(parseInt(height) + 30);
+  }
+}, false);
+</script>
+
+
+
+
+
+
+
+
+  
+
+</body>
+</html>
